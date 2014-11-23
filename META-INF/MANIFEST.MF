@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1411335794967
+Build-Jdk: 1.8.0_20
+Built-By: ludwig
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: com.puresoltechnologies.commons.trees.Activator
+Bundle-ClassPath: .,dependencies/osgi-0.3.0-SNAPSHOT.jar,dependencies/tr
+ ees-0.3.0-SNAPSHOT.jar
+Bundle-Description: This Maven project and all its sub-projects contain 
+ public APIs and SPIs of Purifinity.
+Bundle-DocURL: http://puresol-technologies.com
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.html
+Bundle-ManifestVersion: 2
+Bundle-Name: com.puresoltechnologies.commons.trees.bundle
+Bundle-SymbolicName: com.puresoltechnologies.commons.trees.bundle
+Bundle-Vendor: PureSol Technologies
+Bundle-Version: 0.3.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Embed-Dependency: *;scope=compile|runtime;inline=false
+Embed-Directory: dependencies
+Embed-StripGroup: true
+Embedded-Artifacts: dependencies/osgi-0.3.0-SNAPSHOT.jar;g="com.puresolt
+ echnologies.commons";a="osgi";v="0.3.0-SNAPSHOT",dependencies/trees-0.3
+ .0-SNAPSHOT.jar;g="com.puresoltechnologies.commons";a="trees";v="0.3.0-
+ SNAPSHOT"
+Export-Package: com.puresoltechnologies.commons.trees;version="0.3.0.SNA
+ PSHOT"
+Import-Package: org.osgi.framework;version="[1.7,2)",org.slf4j;version="
+ [1.6,2)"
+Tool: Bnd-1.50.0
