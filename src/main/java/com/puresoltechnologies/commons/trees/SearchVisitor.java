@@ -15,24 +15,29 @@ import java.util.List;
  */
 public class SearchVisitor<T extends Tree<T>> implements TreeVisitor<T> {
 
-	private final TreeSearchCriterion<T> criterion;
+    private final TreeSearchCriterion<T> criterion;
 
-	private final List<T> searchResult = new ArrayList<T>();
+    private final List<T> searchResult = new ArrayList<T>();
 
-	public SearchVisitor(TreeSearchCriterion<T> criterion) {
-		super();
-		this.criterion = criterion;
+    public SearchVisitor(TreeSearchCriterion<T> criterion) {
+	super();
+	this.criterion = criterion;
+    }
+
+    @Override
+    public WalkingAction visit(T tree) {
+	if (criterion.accepted(tree)) {
+	    searchResult.add(tree);
 	}
+	return WalkingAction.PROCEED;
+    }
 
-	@Override
-	public WalkingAction visit(T tree) {
-		if (criterion.accepted(tree)) {
-			searchResult.add(tree);
-		}
-		return WalkingAction.PROCEED;
-	}
-
-	public List<T> getSearchResult() {
-		return searchResult;
-	}
+    /**
+     * This method returns the list of results found during tree walk.
+     * 
+     * @return A {@link List} of T is returned.
+     */
+    public List<T> getSearchResult() {
+	return searchResult;
+    }
 }
