@@ -8,6 +8,7 @@
 	</parent>
 
 	<artifactId>trees.bundle</artifactId>
+	<name>${project.groupId}.${project.artifactId}</name>
 	<packaging>bundle</packaging>
 
 	<dependencies>
@@ -20,16 +21,8 @@
 			<artifactId>trees</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
 		</dependency>
 	</dependencies>
 
