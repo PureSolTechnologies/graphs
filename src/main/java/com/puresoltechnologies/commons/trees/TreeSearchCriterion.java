@@ -1,12 +1,12 @@
 package com.puresoltechnologies.commons.trees;
 
-
 /**
  * This is a simple interface to specify a tree search criterion.
  * 
  * @author Rick-Rainer Ludwig
  * 
  * @param <T>
+ *            is the actual tree implementation.
  */
 public interface TreeSearchCriterion<T extends Tree<T>> {
 
