@@ -11,14 +11,14 @@ public interface Transition<S extends State<S, T>, T extends Transition<S, T>> {
      * This method returns the localized name of the transition which is needed
      * to be presented in a UI.
      * 
-     * @return
+     * @return A {@link String} is returned with the name.
      */
     public String getName();
 
     /**
      * This is the final state of the transition.
      * 
-     * @return
+     * @return The current state object is returned.
      */
     public S getTargetState();
 }

@@ -46,6 +46,12 @@ public interface StateModel<S extends State<S, T>, T extends Transition<S, T>> {
     /**
      * This method checks whether a transition can be performed with the current
      * state.
+     * 
+     * @param transition
+     *            is the transition to be checked for validity at the current
+     *            state.
+     * @return <code>true</code> is returned in case the transition is valid at
+     *         current state. <code>false</code> is returned otherwise.
      */
     public boolean canPerformTransition(T transition);
 
@@ -53,6 +59,7 @@ public interface StateModel<S extends State<S, T>, T extends Transition<S, T>> {
      * This method performs the transition provided.
      * 
      * @param transition
+     *            is the transition to perform.
      * @throws IllegalStateException
      *             is throw in case the transition is not valid for the current
      *             state.

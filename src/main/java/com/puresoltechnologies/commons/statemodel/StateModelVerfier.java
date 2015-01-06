@@ -17,9 +17,9 @@ public class StateModelVerfier {
      * <li>The current state is not null.</li>
      * </ol>
      * 
-     * @param S
+     * @param <S>
      *            is the {@link State} implementation of the model.
-     * @param T
+     * @param <T>
      *            is the {@link Transition} implementation of the model.
      * @param stateModel
      *            is the {@link StateModel} to be checked.

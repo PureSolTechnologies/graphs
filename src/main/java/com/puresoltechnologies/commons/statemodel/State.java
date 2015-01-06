@@ -13,7 +13,7 @@ public interface State<S extends State<S, T>, T extends Transition<S, T>> {
      * This method returns the localized name of the state which is needed to be
      * presented in a UI.
      * 
-     * @return
+     * @return A {@link String} with the name is returned.
      */
     public String getName();
 
