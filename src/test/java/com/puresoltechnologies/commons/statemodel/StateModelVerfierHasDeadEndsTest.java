@@ -52,7 +52,7 @@ public class StateModelVerfierHasDeadEndsTest {
      * State model:
      * 
      * <pre>
-     * (1) -1-> (2) -2-> (3/End)
+     * (1) -1-&gt; (2) -2-&gt; (3/End)
      * </pre>
      */
     @Test
@@ -71,9 +71,9 @@ public class StateModelVerfierHasDeadEndsTest {
      * State model:
      * 
      * <pre>
-     * (1) -1-> (2) -2-> (3/End)
+     * (1) -1-&gt; (2) -2-&gt; (3/End)
      *            \
-     *             \-3-> (4/End)
+     *             \-3-&gt; (4/End)
      * </pre>
      */
     @Test
@@ -95,9 +95,9 @@ public class StateModelVerfierHasDeadEndsTest {
      * State model:
      * 
      * <pre>
-     * (1) -1-> (2) -2-> (3/End)
+     * (1) -1-&gt; (2) -2-&gt; (3/End)
      *   \
-     *    \-3-> (4)
+     *    \-3-&gt; (4)
      * </pre>
      */
     @Test
@@ -118,9 +118,9 @@ public class StateModelVerfierHasDeadEndsTest {
      * State model:
      * 
      * <pre>
-     * (1) -1-> (2) -2-> (3/End)
+     * (1) -1-&gt; (2) -2-&gt; (3/End)
      *   \     /
-     *    <-3-/
+     *    &lt;-3-/
      * </pre>
      */
     @Test
@@ -141,11 +141,11 @@ public class StateModelVerfierHasDeadEndsTest {
      * State model:
      * 
      * <pre>
-     * (1) ----------1-> (2) -2-> (3/End)
+     * (1) ----------1-&gt; (2) -2-v (3/End)
      *   \ \
-     *    \ <-4--\
+     *    \ &lt;-4--\
      *     \      \
-     *      \-3-> (4)
+     *      \-3-&gt; (4)
      * </pre>
      */
     @Test
@@ -168,11 +168,11 @@ public class StateModelVerfierHasDeadEndsTest {
      * State model:
      * 
      * <pre>
-     * (1) ----------1-> (2) -2-> (3/End)
+     * (1) ----------1-&gt; (2) -2-&gt; (3/End)
      *   \ 
-     *    \          <-5--\
+     *    \          &lt;-5--\
      *     \        /       \
-     *      \-3-> (4) -4-> (5)
+     *      \-3-&gt; (4) -4-&gt; (5)
      * </pre>
      */
     @Test
