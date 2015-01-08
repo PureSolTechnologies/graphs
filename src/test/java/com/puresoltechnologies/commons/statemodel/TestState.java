@@ -7,4 +7,7 @@ package com.puresoltechnologies.commons.statemodel;
  * @author Rick-Rainer Ludwig
  */
 public interface TestState extends State<TestState, TestTransition> {
+
+    void addTransition(TestTransition transition);
+
 }
