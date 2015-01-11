@@ -42,9 +42,9 @@
 	</licenses>
 
 	<scm>
-		<developerConnection>scm:git:https://github.com/PureSolTechnologies/commons</developerConnection>
-		<connection>scm:git:https://github.com/PureSolTechnologies/commons</connection>
-		<url>https://github.com/PureSolTechnologies/commons.git</url>
+		<developerConnection>scm:git:https://github.com/PureSolTechnologies/graphs</developerConnection>
+		<connection>scm:git:https://github.com/PureSolTechnologies/graphs</connection>
+		<url>https://github.com/PureSolTechnologies/graphs.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -60,19 +60,19 @@
 
 	<issueManagement>
 		<system>Redmine</system>
-		<url>https://bugs.puresol-technologies.net/projects/commons</url>
+		<url>https://bugs.puresol-technologies.net/projects/graphs</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>https://travis-ci.org/RickRainerLudwig/commons</url>
+		<url>https://travis-ci.org/RickRainerLudwig/graphs</url>
 	</ciManagement>
 
 	<distributionManagement>
 		<site>
 			<id>FTPPureSolTechnologiesCom</id>
 			<name>FTPPureSolTechnologiesCom</name>
-			<url>ftp://puresol-technologies.com/opensource.puresol-technologies.com/projects/commons/${project.version}</url>
+			<url>ftp://puresol-technologies.com/opensource.puresol-technologies.com/projects/graphs/${project.version}</url>
 		</site>
 	</distributionManagement>
 
