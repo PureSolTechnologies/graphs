@@ -88,6 +88,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.puresoltechnologies.graphs</groupId>
+				<artifactId>graph</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.puresoltechnologies.graphs</groupId>
 				<artifactId>statemodel</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -310,6 +315,8 @@
 	</reporting>
 
 	<modules>
+		<module>graph</module>
+		<module>graph.bundle</module>
 		<module>trees</module>
 		<module>trees.bundle</module>
 		<module>statemodel</module>
