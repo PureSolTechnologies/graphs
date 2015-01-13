@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class contains method to check and evaluate {@link StateModel} objects.
+ * This class contains method to check and evaluate {@link Graph}s.
  * 
  * @author Rick-Rainer Ludwig
  */
