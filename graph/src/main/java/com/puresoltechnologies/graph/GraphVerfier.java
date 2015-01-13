@@ -24,9 +24,19 @@ public class GraphVerfier {
      * Beware: The check is done recursively (but in linear time). So, for large
      * models the stack needs to be large enough.
      * 
+     * 
      * @param stateModel
      *            is the model to be checked. If the model has no end states, a
      *            {@link IllegalArgumentException} is thrown.
+     * @param startVertex
+     *            is the {@link Vertex} to start the dead end search.
+     * @param endVertices
+     *            is a {@link Set} of {@link Vertex} which define which vertices
+     *            are to be treated as final states.
+     * @param <V>
+     *            is the {@link Vertex} implementation to be used.
+     * @param <E>
+     *            is the {@link Edge} implementation to be used.
      * @return <code>true</code> is returned of dead ends exist.
      *         <code>false</code> is returned otherwise.
      * @throws IllegalArgumentException
@@ -34,14 +44,14 @@ public class GraphVerfier {
      *             checked for end states (because there are only dead ends).
      */
     public static <V extends Vertex<V, E>, E extends Edge<V, E>> boolean hasDeadEnds(
-	    Graph<V, E> stateModel, V startState, Set<V> endStates)
+	    Graph<V, E> stateModel, V startVertex, Set<V> endVertices)
 	    throws IllegalArgumentException {
-	if ((endStates == null) || (endStates.isEmpty())) {
+	if ((endVertices == null) || (endVertices.isEmpty())) {
 	    throw new IllegalArgumentException("The model has no end states.");
 	}
 	Set<V> checkedStates = new HashSet<>();
-	checkedStates.addAll(endStates);
-	for (V endState : endStates) {
+	checkedStates.addAll(endVertices);
+	for (V endState : endVertices) {
 	    markStatesWhichCanReachEndStates(checkedStates, endState);
 	}
 	return checkedStates.size() != stateModel.getVertices().size();

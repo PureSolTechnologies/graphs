@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * This class is used to model a pair of values. Whether the order first <->
- * second is of importance is a matter of interpretation of the using classes.
+ * This class is used to model a pair of values. Whether the order first
+ * &lt;-&gt; second is of importance is a matter of interpretation of the using
+ * classes.
  * 
  * For directed graphs the first value is the start element and the second the
  * target element for instance. If the graph is not directed, the pair should
@@ -14,6 +15,7 @@ import java.util.Objects;
  * @author Rick-Rainer Ludwig
  *
  * @param <T>
+ *            is the type of the values to be paired.
  */
 public class Pair<T> implements Serializable {
 

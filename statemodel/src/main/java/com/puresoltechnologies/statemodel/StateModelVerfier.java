@@ -1,6 +1,5 @@
 package com.puresoltechnologies.statemodel;
 
-
 /**
  * This class contains method to check and evaluate {@link StateModel} objects.
  * 
@@ -24,6 +23,8 @@ public class StateModelVerfier {
      *            is the {@link Transition} implementation of the model.
      * @param stateModel
      *            is the {@link StateModel} to be checked.
+     * @throws StateModelException
+     *             is thrown in case of an illegal state model.
      */
     public static <S extends State<S, T>, T extends Transition<S, T>> void verifyModel(
 	    StateModel<S, T> stateModel) throws StateModelException {
