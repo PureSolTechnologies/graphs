@@ -27,7 +27,7 @@
 	</dependencies>
 
 	<properties>
-		<bundle.namespace>com.puresoltechnologies.graphs.statemodel</bundle.namespace>
+		<bundle.namespace>com.puresoltechnologies.statemodel</bundle.namespace>
 	</properties>
 
 	<build>

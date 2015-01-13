@@ -27,7 +27,7 @@
 	</dependencies>
 
 	<properties>
-		<bundle.namespace>com.puresoltechnologies.graphs.graph</bundle.namespace>
+		<bundle.namespace>com.puresoltechnologies.graph</bundle.namespace>
 	</properties>
 
 	<build>
