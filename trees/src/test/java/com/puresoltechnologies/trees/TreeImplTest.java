@@ -8,19 +8,19 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
-import com.puresoltechnologies.trees.Tree;
+import com.puresoltechnologies.trees.TreeNode;
 
 public class TreeImplTest {
 
     @Test
     public void testInstance() {
-	assertNotNull(new TreeImpl(null, "Name"));
-	assertNotNull(new TreeImpl("Name"));
+	assertNotNull(new TestTreeNodeImpl(null, "Name"));
+	assertNotNull(new TestTreeNodeImpl("Name"));
     }
 
     @Test
     public void testInitValues() {
-	Tree<TreeImpl> tree = new TreeImpl("Name");
+	TreeNode<TestTreeNodeImpl> tree = new TestTreeNodeImpl("Name");
 	assertEquals("Name", tree.getName());
 	assertNotNull(tree.getChildren());
 	assertFalse(tree.hasChildren());
@@ -30,8 +30,8 @@ public class TreeImplTest {
 
     @Test
     public void testInitValues2() {
-	TreeImpl parent = new TreeImpl("Parent");
-	TreeImpl tree = new TreeImpl(parent, "Name");
+	TestTreeNodeImpl parent = new TestTreeNodeImpl("Parent");
+	TestTreeNodeImpl tree = new TestTreeNodeImpl(parent, "Name");
 	parent.addChild(tree);
 	assertEquals("Name", tree.getName());
 	assertNotNull(tree.getChildren());

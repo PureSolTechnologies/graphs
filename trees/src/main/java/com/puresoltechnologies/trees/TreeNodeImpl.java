@@ -1,22 +1,24 @@
 package com.puresoltechnologies.trees;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
- * This is an abstract, immutable implementation of a {@link Tree}.
+ * This is an abstract, immutable implementation of a {@link TreeNode}.
  * 
  * @author Rick-Rainer Ludwig
  * 
- * @param <T>
+ * @param <N>
  *            is the type of the nodes. T needs to implement AbstractTreeImpl.
  */
-public class AbstractTreeImpl<T extends AbstractTreeImpl<T>> implements
-	Tree<T>, Iterable<T> {
+public class TreeNodeImpl<N extends TreeNodeImpl<N>> implements TreeNode<N>,
+	Iterable<N> {
 
-    private final T parent;
-    private final List<T> children = new ArrayList<T>();
+    private final N parent;
+    private final List<N> children = new ArrayList<N>();
     private final String name;
 
     /**
@@ -27,7 +29,7 @@ public class AbstractTreeImpl<T extends AbstractTreeImpl<T>> implements
      * @param name
      *            is the identifier of this node.
      */
-    public AbstractTreeImpl(T parent, String name) {
+    public TreeNodeImpl(N parent, String name) {
 	super();
 	if (name == null) {
 	    throw new IllegalArgumentException(
@@ -36,7 +38,7 @@ public class AbstractTreeImpl<T extends AbstractTreeImpl<T>> implements
 	this.parent = parent;
 	if (parent != null) {
 	    @SuppressWarnings("unchecked")
-	    T t = (T) this;
+	    N t = (N) this;
 	    parent.addChild(t);
 	}
 	this.name = name;
@@ -49,12 +51,12 @@ public class AbstractTreeImpl<T extends AbstractTreeImpl<T>> implements
      * @param child
      *            is the child to be added to the {@link #children} list.
      */
-    protected void addChild(T child) {
+    protected void addChild(N child) {
 	children.add(child);
     }
 
     @Override
-    public T getParent() {
+    public N getParent() {
 	return parent;
     }
 
@@ -64,8 +66,20 @@ public class AbstractTreeImpl<T extends AbstractTreeImpl<T>> implements
     }
 
     @Override
-    public List<T> getChildren() {
+    public List<N> getChildren() {
 	return children;
+    }
+
+    @Override
+    public Set<TreeLink<N>> getEdges() {
+	Set<TreeLink<N>> edges = new HashSet<>();
+	@SuppressWarnings("unchecked")
+	N thisNode = (N) this;
+	edges.add(new TreeLink<>(parent, thisNode));
+	for (N child : children) {
+	    edges.add(new TreeLink<>(thisNode, child));
+	}
+	return edges;
     }
 
     @Override
@@ -74,9 +88,9 @@ public class AbstractTreeImpl<T extends AbstractTreeImpl<T>> implements
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<N> iterator() {
 	@SuppressWarnings("unchecked")
-	T t = (T) this;
-	return new TreeIterator<T>(t);
+	N t = (N) this;
+	return new TreeIterator<N>(t);
     }
 }

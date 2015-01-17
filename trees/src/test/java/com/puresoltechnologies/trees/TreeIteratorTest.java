@@ -14,26 +14,26 @@ public class TreeIteratorTest {
 
 	@Test
 	public void testInstance() {
-		TreeImpl tree = new TreeImpl("Root");
-		assertNotNull(new TreeIterator<TreeImpl>(tree));
+		TestTreeNodeImpl tree = new TestTreeNodeImpl("Root");
+		assertNotNull(new TreeIterator<TestTreeNodeImpl>(tree));
 	}
 
 	@Test
 	public void testInitValues() {
-		TreeImpl tree = new TreeImpl("Root");
-		TreeIterator<TreeImpl> iterator = new TreeIterator<TreeImpl>(tree);
+		TestTreeNodeImpl tree = new TestTreeNodeImpl("Root");
+		TreeIterator<TestTreeNodeImpl> iterator = new TreeIterator<TestTreeNodeImpl>(tree);
 		assertSame(tree, iterator.getCurrentNode());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullTree() {
-		new TreeIterator<TreeImpl>(null);
+		new TreeIterator<TestTreeNodeImpl>(null);
 	}
 
 	@Test
 	public void testGotoStart() {
-		TreeImpl tree = TreeImpl.getSampleTree();
-		TreeIterator<TreeImpl> iterator = new TreeIterator<TreeImpl>(tree);
+		TestTreeNodeImpl tree = TestTreeNodeImpl.getSampleTree();
+		TreeIterator<TestTreeNodeImpl> iterator = new TreeIterator<TestTreeNodeImpl>(tree);
 		assertEquals("root", iterator.getCurrentNode().getName());
 		iterator.gotoStart();
 		assertEquals("root", iterator.getCurrentNode().getName());
@@ -41,8 +41,8 @@ public class TreeIteratorTest {
 
 	@Test
 	public void testGotoStartPart() {
-		TreeImpl tree = TreeImpl.getSampleTree().getChildren().get(1);
-		TreeIterator<TreeImpl> iterator = new TreeIterator<TreeImpl>(tree);
+		TestTreeNodeImpl tree = TestTreeNodeImpl.getSampleTree().getChildren().get(1);
+		TreeIterator<TestTreeNodeImpl> iterator = new TreeIterator<TestTreeNodeImpl>(tree);
 		assertEquals("n2", iterator.getCurrentNode().getName());
 		iterator.gotoStart();
 		assertEquals("n2", iterator.getCurrentNode().getName());
@@ -50,8 +50,8 @@ public class TreeIteratorTest {
 
 	@Test
 	public void testGotoEnd() {
-		TreeImpl tree = TreeImpl.getSampleTree();
-		TreeIterator<TreeImpl> iterator = new TreeIterator<TreeImpl>(tree);
+		TestTreeNodeImpl tree = TestTreeNodeImpl.getSampleTree();
+		TreeIterator<TestTreeNodeImpl> iterator = new TreeIterator<TestTreeNodeImpl>(tree);
 		assertEquals("root", iterator.getCurrentNode().getName());
 		iterator.gotoEnd();
 		assertEquals("n33", iterator.getCurrentNode().getName());
@@ -59,8 +59,8 @@ public class TreeIteratorTest {
 
 	@Test
 	public void testGotoEndPart() {
-		TreeImpl tree = TreeImpl.getSampleTree().getChildren().get(1);
-		TreeIterator<TreeImpl> iterator = new TreeIterator<TreeImpl>(tree);
+		TestTreeNodeImpl tree = TestTreeNodeImpl.getSampleTree().getChildren().get(1);
+		TreeIterator<TestTreeNodeImpl> iterator = new TreeIterator<TestTreeNodeImpl>(tree);
 		assertEquals("n2", iterator.getCurrentNode().getName());
 		iterator.gotoEnd();
 		assertEquals("n23", iterator.getCurrentNode().getName());
@@ -68,8 +68,8 @@ public class TreeIteratorTest {
 
 	@Test
 	public void testGoForward() {
-		TreeImpl tree = TreeImpl.getSampleTree();
-		TreeIterator<TreeImpl> iterator = new TreeIterator<TreeImpl>(tree);
+		TestTreeNodeImpl tree = TestTreeNodeImpl.getSampleTree();
+		TreeIterator<TestTreeNodeImpl> iterator = new TreeIterator<TestTreeNodeImpl>(tree);
 		assertEquals("root", iterator.getCurrentNode().getName());
 		assertTrue(iterator.goForward());
 		assertEquals("n1", iterator.getCurrentNode().getName());
@@ -100,8 +100,8 @@ public class TreeIteratorTest {
 
 	@Test
 	public void testGoForwardPart() {
-		TreeImpl tree = TreeImpl.getSampleTree().getChildren().get(1);
-		TreeIterator<TreeImpl> iterator = new TreeIterator<TreeImpl>(tree);
+		TestTreeNodeImpl tree = TestTreeNodeImpl.getSampleTree().getChildren().get(1);
+		TreeIterator<TestTreeNodeImpl> iterator = new TreeIterator<TestTreeNodeImpl>(tree);
 		assertEquals("n2", iterator.getCurrentNode().getName());
 		assertTrue(iterator.goForward());
 		assertEquals("n21", iterator.getCurrentNode().getName());
@@ -114,8 +114,8 @@ public class TreeIteratorTest {
 
 	@Test
 	public void testGoBackward() {
-		TreeImpl tree = TreeImpl.getSampleTree();
-		TreeIterator<TreeImpl> iterator = new TreeIterator<TreeImpl>(tree);
+		TestTreeNodeImpl tree = TestTreeNodeImpl.getSampleTree();
+		TreeIterator<TestTreeNodeImpl> iterator = new TreeIterator<TestTreeNodeImpl>(tree);
 		iterator.gotoEnd();
 		assertEquals("n33", iterator.getCurrentNode().getName());
 		assertTrue(iterator.goBackward());
@@ -147,8 +147,8 @@ public class TreeIteratorTest {
 
 	@Test
 	public void testGoBackwardPart() {
-		TreeImpl tree = TreeImpl.getSampleTree().getChildren().get(1);
-		TreeIterator<TreeImpl> iterator = new TreeIterator<TreeImpl>(tree);
+		TestTreeNodeImpl tree = TestTreeNodeImpl.getSampleTree().getChildren().get(1);
+		TreeIterator<TestTreeNodeImpl> iterator = new TreeIterator<TestTreeNodeImpl>(tree);
 		iterator.gotoEnd();
 		assertEquals("n23", iterator.getCurrentNode().getName());
 		assertTrue(iterator.goBackward());

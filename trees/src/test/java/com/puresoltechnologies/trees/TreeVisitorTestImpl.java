@@ -13,14 +13,14 @@ import com.puresoltechnologies.trees.WalkingAction;
  * @author Rick-Rainer Ludwig
  * 
  */
-public class TreeVisitorTestImpl implements TreeVisitor<TreeImpl> {
+public class TreeVisitorTestImpl implements TreeVisitor<TestTreeNodeImpl> {
 
 	private String nodeString = "";
 
 	private Map<String, WalkingAction> actions = new HashMap<String, WalkingAction>();
 
 	@Override
-	public WalkingAction visit(TreeImpl syntaxTree) {
+	public WalkingAction visit(TestTreeNodeImpl syntaxTree) {
 		nodeString += syntaxTree.getName();
 		if (actions.containsKey(syntaxTree.getName())) {
 			return actions.get(syntaxTree.getName());

@@ -29,22 +29,22 @@ public class TreePrinter {
      * {@link #TreePrinter(PrintStream)}.
      * 
      * @param tree
-     *            is the {@link Tree} object to be printed.
+     *            is the {@link TreeNode} object to be printed.
      * @param <T>
      *            is the concrete tree interface to be used.
      */
-    public <T extends Tree<T>> void println(T tree) {
+    public <N extends TreeNode<N>> void println(N tree) {
 	println(tree, 0);
     }
 
-    private <T extends Tree<T>> void println(T node, int depth) {
+    private <N extends TreeNode<N>> void println(N node, int depth) {
 	for (int i = 0; i < depth; i++) {
 	    stream.print("  |  ");
 	}
 	stream.print("  |__");
 	stream.print("id: " + node.toString());
 	stream.println();
-	for (T childNode : node.getChildren()) {
+	for (N childNode : node.getChildren()) {
 	    println(childNode, depth + 1);
 	}
     }

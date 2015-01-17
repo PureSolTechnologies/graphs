@@ -11,7 +11,7 @@ public class TreeUtilsTest {
 
     @Test
     public void testCountNodes() {
-	TreeImpl tree = TreeImpl.getSampleTree();
+	TestTreeNodeImpl tree = TestTreeNodeImpl.getSampleTree();
 	new TreePrinter(System.out).println(tree);
 	int count = TreeUtils.countNodes(tree);
 	assertEquals(13, count);

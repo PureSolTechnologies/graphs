@@ -5,10 +5,10 @@ package com.puresoltechnologies.trees;
  * 
  * @author Rick-Rainer Ludwig
  * 
- * @param <T>
- *            is the actual tree implementation.
+ * @param <N>
+ *            is the actual tree node implementation.
  */
-public interface TreeSearchCriterion<T extends Tree<T>> {
+public interface TreeSearchCriterion<N extends TreeNode<N>> {
 
     /**
      * This method returns whether a node is accepted as a search result or not.
@@ -18,6 +18,6 @@ public interface TreeSearchCriterion<T extends Tree<T>> {
      * @return True is returned if the current node is to be added to the search
      *         result or not. False is returned otherwise.
      */
-    public boolean accepted(T node);
+    public boolean accepted(N node);
 
 }

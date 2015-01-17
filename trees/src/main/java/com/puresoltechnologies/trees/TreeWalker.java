@@ -5,23 +5,24 @@ package com.puresoltechnologies.trees;
  * 
  * @author Rick-Rainer Ludwig
  * 
- * @param <T>
+ * @param <N>
  *            is the actual tree type.
  */
-public class TreeWalker<T extends Tree<T>> {
+public class TreeWalker<N extends TreeNode<N>> {
 
-    public static <T extends Tree<T>> void walk(TreeVisitor<T> visitor, T tree) {
-	new TreeWalker<T>(tree).walk(visitor);
+    public static <N extends TreeNode<N>> void walk(TreeVisitor<N> visitor,
+	    N tree) {
+	new TreeWalker<N>(tree).walk(visitor);
     }
 
-    public static <T extends Tree<T>> void walkBackward(TreeVisitor<T> visitor,
-	    T tree) {
-	new TreeWalker<T>(tree).walkBackward(visitor);
+    public static <N extends TreeNode<N>> void walkBackward(
+	    TreeVisitor<N> visitor, N tree) {
+	new TreeWalker<N>(tree).walkBackward(visitor);
     }
 
-    private final T tree;
+    private final N tree;
 
-    public TreeWalker(T tree) {
+    public TreeWalker(N tree) {
 	super();
 	if (tree == null) {
 	    throw new IllegalArgumentException(
@@ -33,7 +34,7 @@ public class TreeWalker<T extends Tree<T>> {
     /**
      * @return the tree
      */
-    public T getTree() {
+    public N getTree() {
 	return tree;
     }
 
@@ -44,7 +45,7 @@ public class TreeWalker<T extends Tree<T>> {
      * @param treeVisitor
      *            is the visitor to trigger for each node visiting.
      */
-    public void walk(TreeVisitor<T> treeVisitor) {
+    public void walk(TreeVisitor<N> treeVisitor) {
 	if (tree != null) {
 	    walk(tree, treeVisitor);
 	}
@@ -57,14 +58,14 @@ public class TreeWalker<T extends Tree<T>> {
      * @param walkerClient
      * @return
      */
-    private WalkingAction walk(T tree, TreeVisitor<T> walkerClient) {
+    private WalkingAction walk(N tree, TreeVisitor<N> walkerClient) {
 	WalkingAction action = walkerClient.visit(tree);
 	if (action == WalkingAction.ABORT) {
 	    return WalkingAction.ABORT;
 	} else if (action == WalkingAction.LEAVE_BRANCH) {
 	    return WalkingAction.PROCEED;
 	}
-	for (T child : tree.getChildren()) {
+	for (N child : tree.getChildren()) {
 	    if (walk(child, walkerClient) == WalkingAction.ABORT) {
 		return WalkingAction.ABORT;
 	    }
@@ -79,15 +80,15 @@ public class TreeWalker<T extends Tree<T>> {
      * @param treeVisitor
      *            is the visitor to trigger for each node visiting.
      */
-    public void walkBackward(TreeVisitor<T> treeVisitor) {
+    public void walkBackward(TreeVisitor<N> treeVisitor) {
 	if (tree != null) {
 	    walkBackward(tree, treeVisitor);
 	}
     }
 
-    private WalkingAction walkBackward(T tree, TreeVisitor<T> walkerClient) {
+    private WalkingAction walkBackward(N tree, TreeVisitor<N> walkerClient) {
 	for (int id = tree.getChildren().size() - 1; id >= 0; id--) {
-	    T child = tree.getChildren().get(id);
+	    N child = tree.getChildren().get(id);
 	    WalkingAction action = walkBackward(child, walkerClient);
 	    if (action == WalkingAction.ABORT) {
 		return WalkingAction.ABORT;

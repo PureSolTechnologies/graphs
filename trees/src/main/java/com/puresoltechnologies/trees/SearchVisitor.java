@@ -10,22 +10,22 @@ import java.util.List;
  * 
  * @author Rick-Rainer Ludwig
  * 
- * @param <T>
- *            is the {@link Tree} type to be used.
+ * @param <N>
+ *            is the {@link TreeNode} type to be used.
  */
-public class SearchVisitor<T extends Tree<T>> implements TreeVisitor<T> {
+public class SearchVisitor<N extends TreeNode<N>> implements TreeVisitor<N> {
 
-    private final TreeSearchCriterion<T> criterion;
+    private final TreeSearchCriterion<N> criterion;
 
-    private final List<T> searchResult = new ArrayList<T>();
+    private final List<N> searchResult = new ArrayList<N>();
 
-    public SearchVisitor(TreeSearchCriterion<T> criterion) {
+    public SearchVisitor(TreeSearchCriterion<N> criterion) {
 	super();
 	this.criterion = criterion;
     }
 
     @Override
-    public WalkingAction visit(T tree) {
+    public WalkingAction visit(N tree) {
 	if (criterion.accepted(tree)) {
 	    searchResult.add(tree);
 	}
@@ -37,7 +37,7 @@ public class SearchVisitor<T extends Tree<T>> implements TreeVisitor<T> {
      * 
      * @return A {@link List} of T is returned.
      */
-    public List<T> getSearchResult() {
+    public List<N> getSearchResult() {
 	return searchResult;
     }
 }

@@ -4,14 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.puresoltechnologies.trees.AbstractTreeImpl;
+import com.puresoltechnologies.trees.TreeNodeImpl;
 import com.puresoltechnologies.trees.SearchVisitor;
 import com.puresoltechnologies.trees.TreeSearchCriterion;
 import com.puresoltechnologies.trees.TreeWalker;
 
 public class SearchVisitorTest {
 
-    private class IntegerTree extends AbstractTreeImpl<IntegerTree> {
+    private class IntegerTree extends TreeNodeImpl<IntegerTree> {
 
 	private final int i;
 

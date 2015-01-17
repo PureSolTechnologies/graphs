@@ -14,19 +14,19 @@ public class TreeUtils {
      * This method counts all nodes within a tree.
      * 
      * @param tree
-     *            is a {@link Tree} object which nodes are to be calculated.
-     * @param <T>
+     *            is a {@link TreeNode} object which nodes are to be calculated.
+     * @param <N>
      *            is the actual tree implementation.
      * @return An integer is returned containing the number of nodes. If tree is
      *         <code>null</code> 0 is returned.
      */
-    public static <T extends Tree<T>> int countNodes(T tree) {
+    public static <N extends TreeNode<N>> int countNodes(N tree) {
 	int result = 0;
 	if (tree == null) {
 	    return result;
 	}
-	List<T> children = tree.getChildren();
-	for (T node : children) {
+	List<N> children = tree.getChildren();
+	for (N node : children) {
 	    result += countNodes(node);
 	}
 	return result + 1; // + 1 for self!
@@ -40,23 +40,23 @@ public class TreeUtils {
      *            is the first tree to be compared to the second.
      * @param tree2
      *            is the second tree to be compared to the first.
-     * @param <T>
+     * @param <N>
      *            is the actual tree implementation.
      * @return <code>true</code> is returned if the trees are equals.
      *         <code>false</code> is returned otherwise.
      */
-    public static <T extends Tree<T>> boolean equalsWithoutOrder(T tree1,
-	    T tree2) {
+    public static <N extends TreeNode<N>> boolean equalsWithoutOrder(N tree1,
+	    N tree2) {
 	if (!tree1.getName().equals(tree2.getName())) {
 	    return false;
 	}
-	List<T> children1 = tree1.getChildren();
-	List<T> children2 = tree2.getChildren();
+	List<N> children1 = tree1.getChildren();
+	List<N> children2 = tree2.getChildren();
 	if (children1.size() != children2.size()) {
 	    return false;
 	}
-	for (T child1 : children1) {
-	    for (T child2 : children2) {
+	for (N child1 : children1) {
+	    for (N child2 : children2) {
 		if (child1.equals(child2)) {
 		    boolean equals = equalsWithoutOrder(child1, child2);
 		    if (!equals) {
