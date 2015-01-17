@@ -13,7 +13,7 @@ import org.junit.rules.ExpectedException;
 import com.puresoltechnologies.statemodel.StateModelException;
 import com.puresoltechnologies.statemodel.StateModelVerfier;
 
-public class StateModelVerfierVerifyModelTest {
+public class StateModelVerfierTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();

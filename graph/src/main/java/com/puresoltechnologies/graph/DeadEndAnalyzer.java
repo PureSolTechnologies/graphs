@@ -8,7 +8,7 @@ import java.util.Set;
  * 
  * @author Rick-Rainer Ludwig
  */
-public class GraphVerfier {
+public class DeadEndAnalyzer {
 
     /**
      * This method checks whether a graph has dead ends or not assuming the
@@ -79,37 +79,8 @@ public class GraphVerfier {
     }
 
     /**
-     * This method searches a given {@link Graph} for cycles.
-     * 
-     * @param graph
-     *            is the {@link Graph} to be searched for cycles.
-     * @return <code>true</code> is returned if a cycle was found.
-     *         <code>false</code> is returned otherwise.
-     */
-    public static <V extends Vertex<V, E>, E extends Edge<V, E>> boolean hasCycles(
-	    Graph<V, E> graph) {
-	// FIXME
-	throw new IllegalStateException("Not implemented, yet!");
-    }
-
-    /**
-     * This method searches a given {@link Graph} for disconnected subgraphs.
-     * 
-     * @param graph
-     *            is the {@link Graph} to be searched for disconnected
-     *            subgraphs.
-     * @return <code>true</code> is returned if a disconnected subgraph (vertex)
-     *         was found. <code>false</code> is returned otherwise.
-     */
-    public static <V extends Vertex<V, E>, E extends Edge<V, E>> boolean hasDisconnectedSubgraph(
-	    Graph<V, E> graph) {
-	// FIXME
-	throw new IllegalStateException("Not implemented, yet!");
-    }
-
-    /**
      * Private constructor to avoid instantiation.
      */
-    private GraphVerfier() {
+    private DeadEndAnalyzer() {
     }
 }

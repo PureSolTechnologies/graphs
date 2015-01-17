@@ -1,7 +1,7 @@
 package com.puresoltechnologies.trees;
 
 import com.puresoltechnologies.graph.Graph;
-import com.puresoltechnologies.graph.GraphVerfier;
+import com.puresoltechnologies.graph.DeadEndAnalyzer;
 
 /**
  * This is the interface for a Tree {@link Graph}. This interface is to be seen
@@ -9,7 +9,7 @@ import com.puresoltechnologies.graph.GraphVerfier;
  * 
  * A valid implementation and assignment of a tree has the condition that
  * {@link GraphVerfier#hasCycles(Graph))} returns <code>false</code> and
- * {@link GraphVerfier#hasDisconnectedSubgraph(Graph)} returns false, too.
+ * {@link DeadEndAnalyzer#hasDisconnectedSubgraph(Graph)} returns false, too.
  * Additionally, the node returned by {@link #getRootNode()} must not have a
  * parent.
  * 
