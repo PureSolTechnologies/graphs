@@ -15,6 +15,21 @@ public class CycleAnalyzerTest {
      * </pre>
      */
     @Test
+    public void shouldReturnFalseForSingleVertexGraph() {
+	TestGraph graph = new TestGraphImpl();
+	graph.createVertex();
+	assertFalse(CycleAnalyzer.hasCycles(graph, true));
+	assertFalse(CycleAnalyzer.hasCycles(graph, false));
+    }
+
+    /**
+     * Graph:
+     * 
+     * <pre>
+     * 1 -&gt; 2 -&gt; 3
+     * </pre>
+     */
+    @Test
     public void shouldReturnFalse() {
 	TestGraph graph = new TestGraphImpl();
 	TestVertex vertex1 = graph.createVertex();
