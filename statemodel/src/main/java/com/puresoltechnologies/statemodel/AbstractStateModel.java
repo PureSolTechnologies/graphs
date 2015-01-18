@@ -39,7 +39,7 @@ public abstract class AbstractStateModel<S extends State<S, T>, T extends Transi
 	return currentState;
     }
 
-    protected final void setState(S state) {
+    protected void setState(S state) {
 	currentState = state;
     }
 
