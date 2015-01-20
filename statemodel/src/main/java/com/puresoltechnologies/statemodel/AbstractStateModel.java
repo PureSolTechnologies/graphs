@@ -17,7 +17,6 @@ public abstract class AbstractStateModel<S extends State<S, T>, T extends Transi
      */
     public AbstractStateModel() {
 	super();
-	currentState = getStartState();
     }
 
     /**
@@ -36,6 +35,9 @@ public abstract class AbstractStateModel<S extends State<S, T>, T extends Transi
 
     @Override
     public final S getState() {
+	if (currentState == null) {
+	    currentState = getStartState();
+	}
 	return currentState;
     }
 
