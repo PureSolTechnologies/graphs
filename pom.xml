@@ -8,7 +8,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<officalName>Graphs</officalName>
-		<commons.version>0.4.0</commons.version>
+		<commons.version>0.5.0-SNAPSHOT</commons.version>
 	</properties>
 
 	<parent>
