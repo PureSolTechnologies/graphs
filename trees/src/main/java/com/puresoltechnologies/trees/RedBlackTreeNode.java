@@ -83,6 +83,10 @@ public class RedBlackTreeNode<Key extends Comparable<Key>, Value>
 	return parent;
     }
 
+    public void setParent(RedBlackTreeNode<Key, Value> parent) {
+	this.parent = parent;
+    }
+
     @Override
     public boolean hasChildren() {
 	return (left != null) || (right != null);
