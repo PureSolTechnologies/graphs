@@ -3,42 +3,34 @@ package com.puresoltechnologies.trees;
 import static com.puresoltechnologies.trees.RedBlackTreeNode.BLACK;
 import static com.puresoltechnologies.trees.RedBlackTreeNode.RED;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Queue;
-import java.util.Set;
 
-public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<RedBlackTreeNode<Key, Value>> {
-
-    private RedBlackTreeNode<Key, Value> root;
+/**
+ * This is a RedBlackTree implementation based on {@link BinarySearchTree}.
+ * 
+ * @see http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+ * 
+ * @author Rick-Rainer Ludwig
+ *
+ * @param <Key>
+ * @param <Value>
+ */
+public class RedBlackTree<Key extends Comparable<Key>, Value> extends
+	BinarySearchTree<RedBlackTreeNode<Key, Value>, Key, Value> implements Tree<RedBlackTreeNode<Key, Value>> {
 
     public RedBlackTree() {
 	super();
     }
 
-    @Override
-    public RedBlackTreeNode<Key, Value> getRootNode() {
-	return root;
-    }
-
-    @Override
-    public Set<RedBlackTreeNode<Key, Value>> getVertices() {
-	Set<RedBlackTreeNode<Key, Value>> vertices = new HashSet<>();
-	getVertices(vertices, root);
-	return vertices;
-    }
-
-    private void getVertices(Set<RedBlackTreeNode<Key, Value>> vertices, RedBlackTreeNode<Key, Value> node) {
-	vertices.add(node);
-	for (RedBlackTreeNode<Key, Value> child : node.getChildren()) {
-	    getVertices(vertices, child);
-	}
-    }
-
     /***************************************************************************
      * Node helper methods.
      ***************************************************************************/
+
+    public int size() {
+	return size(root);
+    }
 
     // number of RedBlackTreeNode in subtree rooted at x; 0 if x is null
     private int size(RedBlackTreeNode<Key, Value> x) {
@@ -47,64 +39,11 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
 	return x.getSize();
     }
 
-    /**
-     * Is this symbol table empty?
-     * 
-     * @return <tt>true</tt> if this symbol table is empty and <tt>false</tt>
-     *         otherwise
-     */
-    public boolean isEmpty() {
-	return root == null;
-    }
-
-    /***************************************************************************
-     * Standard BST search.
-     ***************************************************************************/
-
-    /**
-     * Returns the value associated with the given key.
-     * 
-     * @param key
-     *            the key
-     * @return the value associated with the given key if the key is in the
-     *         symbol table and <tt>null</tt> if the key is not in the symbol
-     *         table
-     * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
-     */
-    public Value get(Key key) {
-	if (key == null)
-	    throw new NullPointerException("argument to get() is null");
-	return get(root, key);
-    }
-
-    // value associated with the given key in subtree rooted at x; null if no
-    // such key
-    private Value get(RedBlackTreeNode<Key, Value> x, Key key) {
-	while (x != null) {
-	    int cmp = key.compareTo(x.getKey());
-	    if (cmp < 0)
-		x = x.getLeft();
-	    else if (cmp > 0)
-		x = x.getRight();
-	    else
-		return x.getValue();
+    private boolean isRed(RedBlackTreeNode<Key, Value> x) {
+	if (x == null) {
+	    return false;
 	}
-	return null;
-    }
-
-    /**
-     * Does this symbol table contain the given key?
-     * 
-     * @param key
-     *            the key
-     * @return <tt>true</tt> if this symbol table contains <tt>key</tt> and
-     *         <tt>false</tt> otherwise
-     * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
-     */
-    public boolean contains(Key key) {
-	return get(key) != null;
+	return x.getColor();
     }
 
     /***************************************************************************
@@ -119,19 +58,16 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
      *
      * @param key
      *            the key
-     * @param val
+     * @param value
      *            the value
-     * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
      */
-    public void put(Key key, Value val) {
-	if (key == null)
-	    throw new NullPointerException("first argument to put() is null");
-	if (val == null) {
+    @Override
+    public void put(Key key, Value value) {
+	if (value == null) {
 	    delete(key);
 	    return;
 	}
-	root = put(root, key, val);
+	root = put(root, key, value);
 	root.setColor(BLACK);
     }
 
@@ -141,23 +77,21 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
 	    return new RedBlackTreeNode<>(key, value, RED, 1);
 
 	int cmp = key.compareTo(h.getKey());
-	RedBlackTreeNode<Key, Value> right = h.getRight();
-	RedBlackTreeNode<Key, Value> left = h.getLeft();
 	if (cmp < 0)
-	    h.setLeft(put(left, key, value));
+	    h.setLeft(put(h.getLeft(), key, value));
 	else if (cmp > 0)
-	    h.setRight(put(right, key, value));
+	    h.setRight(put(h.getRight(), key, value));
 	else
 	    h.setValue(value);
 
 	// fix-up any right-leaning links
-	if (right.isRed() && !left.isRed())
+	if (isRed(h.getRight()) && !isRed(h.getLeft()))
 	    h = rotateLeft(h);
-	if (left.isRed() && left.isRed())
+	if (isRed(h.getLeft()) && isRed(h.getLeft().getLeft()))
 	    h = rotateRight(h);
-	if (left.isRed() && right.isRed())
+	if (isRed(h.getLeft()) && isRed(h.getRight()))
 	    flipColors(h);
-	h.setSize(size(left) + size(right) + 1);
+	h.setSize(size(h.getLeft()) + size(h.getRight()) + 1);
 
 	return h;
     }
@@ -177,7 +111,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
 	    throw new NoSuchElementException("BST underflow");
 
 	// if both children of root are black, set root to red
-	if (!root.getLeft().isRed() && !root.getRight().isRed())
+	if (!isRed(root.getLeft()) && !isRed(root.getRight()))
 	    root.setColor(RED);
 
 	root = deleteMin(root);
@@ -191,7 +125,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
 	if (h.getLeft() == null)
 	    return null;
 
-	if (!h.getLeft().isRed() && !h.getLeft().getLeft().isRed())
+	if (!isRed(h.getLeft()) && !isRed(h.getLeft().getLeft()))
 	    h = moveRedLeft(h);
 
 	h.setLeft(deleteMin(h.getLeft()));
@@ -209,24 +143,25 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
 	    throw new NoSuchElementException("BST underflow");
 
 	// if both children of root are black, set root to red
-	if (!root.getLeft().isRed() && !root.getRight().isRed())
+	if (!isRed(root.getLeft()) && !isRed(root.getRight()))
 	    root.setColor(RED);
 
 	root = deleteMax(root);
-	if (!isEmpty())
+	if (!isEmpty()) {
 	    root.setColor(BLACK);
+	}
 	// assert check();
     }
 
     // delete the key-value pair with the maximum key rooted at h
     private RedBlackTreeNode<Key, Value> deleteMax(RedBlackTreeNode<Key, Value> h) {
-	if (h.getLeft().isRed())
+	if (isRed(h.getLeft()))
 	    h = rotateRight(h);
 
 	if (h.getRight() == null)
 	    return null;
 
-	if (!h.getRight().isRed() && !h.getRight().getLeft().isRed())
+	if (!isRed(h.getRight()) && !isRed(h.getRight().getLeft()))
 	    h = moveRedRight(h);
 
 	h.setRight(deleteMax(h.getRight()));
@@ -240,18 +175,18 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
      *
      * @param key
      *            the key
-     * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
      */
+    @Override
     public void delete(Key key) {
-	if (key == null)
-	    throw new NullPointerException("argument to delete() is null");
-	if (!contains(key))
+	// TODO check whether this needs to be checked!!
+	if (!contains(key)) {
 	    return;
+	}
 
 	// if both children of root are black, set root to red
-	if (!root.getLeft().isRed() && !root.getRight().isRed())
+	if (!isRed(root.getLeft()) && !isRed(root.getRight())) {
 	    root.setColor(RED);
+	}
 
 	root = delete(root, key);
 	if (!isEmpty())
@@ -264,15 +199,15 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
 	// assert get(h, key) != null;
 
 	if (key.compareTo(h.getKey()) < 0) {
-	    if (!h.getLeft().isRed() && !h.getLeft().getLeft().isRed())
+	    if (!isRed(h.getLeft()) && !isRed(h.getLeft().getLeft()))
 		h = moveRedLeft(h);
 	    h.setLeft(delete(h.getLeft(), key));
 	} else {
-	    if (h.getLeft().isRed())
+	    if (isRed(h.getLeft()))
 		h = rotateRight(h);
 	    if (key.compareTo(h.getKey()) == 0 && (h.getRight() == null))
 		return null;
-	    if (!h.getRight().isRed() && !h.getRight().getLeft().isRed())
+	    if (!isRed(h.getRight()) && !isRed(h.getRight().getLeft()))
 		h = moveRedRight(h);
 	    if (key.compareTo(h.getKey()) == 0) {
 		RedBlackTreeNode<Key, Value> x = min(h.getRight());
@@ -335,7 +270,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
 	// assert isRed(h) && !h.getLeft().isRed() && !isRed(h.left.left);
 
 	flipColors(h);
-	if (h.getRight().getLeft().isRed()) {
+	if (isRed(h.getRight().getLeft())) {
 	    h.setRight(rotateRight(h.getRight()));
 	    h = rotateLeft(h);
 	    flipColors(h);
@@ -349,7 +284,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
 	// assert (h != null);
 	// assert isRed(h) && !h.getRight().isRed() && !isRed(h.right.left);
 	flipColors(h);
-	if (h.getLeft().getLeft().isRed()) {
+	if (isRed(h.getLeft().getLeft())) {
 	    h = rotateRight(h);
 	    flipColors(h);
 	}
@@ -360,11 +295,11 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
     private RedBlackTreeNode<Key, Value> balance(RedBlackTreeNode<Key, Value> h) {
 	// assert (h != null);
 
-	if (h.getRight().isRed())
+	if (isRed(h.getRight()))
 	    h = rotateLeft(h);
-	if (h.getLeft().isRed() && h.getLeft().getLeft().isRed())
+	if (isRed(h.getLeft()) && isRed(h.getLeft().getLeft()))
 	    h = rotateRight(h);
-	if (h.getLeft().isRed() && h.getRight().isRed())
+	if (isRed(h.getLeft()) && isRed(h.getRight()))
 	    flipColors(h);
 
 	h.setSize(size(h.getLeft()) + size(h.getRight()) + 1);
@@ -448,12 +383,8 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
      *         <tt>key</tt>
      * @throws NoSuchElementException
      *             if there is no such key
-     * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
      */
     public Key floor(Key key) {
-	if (key == null)
-	    throw new NullPointerException("argument to floor() is null");
 	if (isEmpty())
 	    throw new NoSuchElementException("called floor() with empty symbol table");
 	RedBlackTreeNode<Key, Value> x = floor(root, key);
@@ -490,12 +421,8 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
      *         <tt>key</tt>
      * @throws NoSuchElementException
      *             if there is no such key
-     * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
      */
     public Key ceiling(Key key) {
-	if (key == null)
-	    throw new NullPointerException("argument to ceiling() is null");
 	if (isEmpty())
 	    throw new NoSuchElementException("called ceiling() with empty symbol table");
 	RedBlackTreeNode<Key, Value> x = ceiling(root, key);
@@ -559,12 +486,8 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
      *            the key
      * @return the number of keys in the symbol table strictly less than
      *         <tt>key</tt>
-     * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
      */
     public int rank(Key key) {
-	if (key == null)
-	    throw new NullPointerException("argument to rank() is null");
 	return rank(key, root);
     }
 
@@ -604,15 +527,8 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
      * 
      * @return all keys in the sybol table between <tt>lo</tt> (inclusive) and
      *         <tt>hi</tt> (exclusive) as an <tt>Iterable</tt>
-     * @throws NullPointerException
-     *             if either <tt>lo</tt> or <tt>hi</tt> is <tt>null</tt>
      */
     public Iterable<Key> keys(Key lo, Key hi) {
-	if (lo == null)
-	    throw new NullPointerException("first argument to keys() is null");
-	if (hi == null)
-	    throw new NullPointerException("second argument to keys() is null");
-
 	Queue<Key> queue = new LinkedList<>();
 	// if (isEmpty() || lo.compareTo(hi) > 0) return queue;
 	keys(root, queue, lo, hi);
@@ -637,23 +553,124 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Tree<Re
     /**
      * Returns the number of keys in the symbol table in the given range.
      * 
-     * @return the number of keys in the sybol table between <tt>lo</tt>
-     *         (inclusive) and <tt>hi</tt> (exclusive)
-     * @throws NullPointerException
-     *             if either <tt>lo</tt> or <tt>hi</tt> is <tt>null</tt>
+     * @return the number of keys in the symbol table between <tt>low</tt>
+     *         (inclusive) and <tt>high</tt> (exclusive)
      */
-    public int size(Key lo, Key hi) {
-	if (lo == null)
-	    throw new NullPointerException("first argument to size() is null");
-	if (hi == null)
-	    throw new NullPointerException("second argument to size() is null");
-
-	if (lo.compareTo(hi) > 0)
+    public int size(Key low, Key high) {
+	if (low.compareTo(high) > 0)
 	    return 0;
-	if (contains(hi))
-	    return rank(hi) - rank(lo) + 1;
+	if (contains(high))
+	    return rank(high) - rank(low) + 1;
 	else
-	    return rank(hi) - rank(lo);
+	    return rank(high) - rank(low);
     }
 
+    /***************************************************************************
+     * Check integrity of red-black tree data structure.
+     ***************************************************************************/
+    public boolean check() {
+	if (!isBST()) {
+	    System.err.println("Not in symmetric order");
+	    return false;
+	}
+	if (!isSizeConsistent()) {
+	    System.err.println("Subtree counts not consistent");
+	    return false;
+	}
+	if (!isRankConsistent()) {
+	    System.err.println("Ranks not consistent");
+	    return false;
+	}
+	if (!is23()) {
+	    System.err.println("Not a 2-3 tree");
+	    return false;
+	}
+	if (!isBalanced()) {
+	    System.out.println("Not balanced");
+	    return false;
+	}
+	return true;
+    }
+
+    // does this binary tree satisfy symmetric order?
+    // Note: this test also ensures that data structure is a binary tree since
+    // order is strict
+    private boolean isBST() {
+	return isBST(root, null, null);
+    }
+
+    // is the tree rooted at x a BST with all keys strictly between min and max
+    // (if min or max is null, treat as empty constraint)
+    // Credit: Bob Dondero's elegant solution
+    private boolean isBST(RedBlackTreeNode<Key, Value> x, Key min, Key max) {
+	if (x == null)
+	    return true;
+	if (min != null && x.getKey().compareTo(min) <= 0)
+	    return false;
+	if (max != null && x.getKey().compareTo(max) >= 0)
+	    return false;
+	return isBST(x.getLeft(), min, x.getKey()) && isBST(x.getRight(), x.getKey(), max);
+    }
+
+    // are the size fields correct?
+    private boolean isSizeConsistent() {
+	return isSizeConsistent(root);
+    }
+
+    private boolean isSizeConsistent(RedBlackTreeNode<Key, Value> x) {
+	if (x == null)
+	    return true;
+	if (x.getSize() != size(x.getLeft()) + size(x.getRight()) + 1)
+	    return false;
+	return isSizeConsistent(x.getLeft()) && isSizeConsistent(x.getRight());
+    }
+
+    // check that ranks are consistent
+    private boolean isRankConsistent() {
+	for (int i = 0; i < size(); i++)
+	    if (i != rank(select(i)))
+		return false;
+	for (Key key : keys())
+	    if (key.compareTo(select(rank(key))) != 0)
+		return false;
+	return true;
+    }
+
+    // Does the tree have no red right links, and at most one (left)
+    // red links in a row on any path?
+    private boolean is23() {
+	return is23(root);
+    }
+
+    private boolean is23(RedBlackTreeNode<Key, Value> x) {
+	if (x == null)
+	    return true;
+	if (isRed(x.getRight()))
+	    return false;
+	if (x != root && isRed(x) && isRed(x.getLeft()))
+	    return false;
+	return is23(x.getLeft()) && is23(x.getRight());
+    }
+
+    // do all paths from root to leaf have same number of black edges?
+    private boolean isBalanced() {
+	int black = 0; // number of black links on path from root to min
+	RedBlackTreeNode<Key, Value> x = root;
+	while (x != null) {
+	    if (!isRed(x))
+		black++;
+	    x = x.getLeft();
+	}
+	return isBalanced(root, black);
+    }
+
+    // does every path from the root to a leaf have the given number of black
+    // links?
+    private boolean isBalanced(RedBlackTreeNode<Key, Value> x, int black) {
+	if (x == null)
+	    return black == 0;
+	if (!isRed(x))
+	    black--;
+	return isBalanced(x.getLeft(), black) && isBalanced(x.getRight(), black);
+    }
 }
