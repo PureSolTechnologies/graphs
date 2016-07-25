@@ -52,6 +52,9 @@ public class RedBlackTreeNode<Key extends Comparable<Key>, Value>
 
     public void setLeft(RedBlackTreeNode<Key, Value> left) {
 	this.left = left;
+	if (left != null) {
+	    left.setParent(this);
+	}
     }
 
     @Override
@@ -61,6 +64,9 @@ public class RedBlackTreeNode<Key extends Comparable<Key>, Value>
 
     public void setRight(RedBlackTreeNode<Key, Value> right) {
 	this.right = right;
+	if (right != null) {
+	    right.setParent(this);
+	}
     }
 
     @Override
@@ -83,7 +89,7 @@ public class RedBlackTreeNode<Key extends Comparable<Key>, Value>
 	return parent;
     }
 
-    public void setParent(RedBlackTreeNode<Key, Value> parent) {
+    private void setParent(RedBlackTreeNode<Key, Value> parent) {
 	this.parent = parent;
     }
 

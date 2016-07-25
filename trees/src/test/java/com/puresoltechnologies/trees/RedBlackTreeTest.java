@@ -46,7 +46,7 @@ public class RedBlackTreeTest {
     }
 
     @Test
-    public void test() {
+    public void test100Elements() {
 	List<Integer> numbers = new ArrayList<>();
 	for (int i = 0; i < 100; ++i) {
 	    numbers.add(i);
@@ -63,4 +63,20 @@ public class RedBlackTreeTest {
 	//
     }
 
+    @Test
+    public void testFibonacci() {
+	RedBlackTree<Long, Integer> tree = new RedBlackTree<>();
+	tree.put(0l, 0);
+	tree.put(1l, 1);
+	long a = 0;
+	long b = 1;
+	for (int i = 3; i <= 101; ++i) {
+	    long f = a + b;
+	    tree.put(f, i);
+	    a = b;
+	    b = f;
+	}
+	assertEquals(100, tree.getRootNode().getSize());
+	new TreePrinter(System.out).println(tree);
+    }
 }

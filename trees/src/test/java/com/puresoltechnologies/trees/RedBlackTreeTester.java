@@ -35,6 +35,10 @@ public class RedBlackTreeTester<Key extends Comparable<Key>, Value> {
 	    System.out.println("Not balanced");
 	    return false;
 	}
+	if (!isParentConsistent()) {
+	    System.out.println("Parents are inconsistent.");
+	    return false;
+	}
 	return true;
     }
 
@@ -120,4 +124,21 @@ public class RedBlackTreeTester<Key extends Comparable<Key>, Value> {
 	return isBalanced(x.getLeft(), black) && isBalanced(x.getRight(), black);
     }
 
+    private boolean isParentConsistent() {
+	return isParentConsistent(root);
+    }
+
+    private boolean isParentConsistent(RedBlackTreeNode<Key, Value> x) {
+	if (x == null)
+	    return true;
+	RedBlackTreeNode<Key, Value> left = x.getLeft();
+	if ((left != null) && (!left.getParent().equals(x))) {
+	    return false;
+	}
+	RedBlackTreeNode<Key, Value> right = x.getRight();
+	if ((right != null) && (!right.getParent().equals(x))) {
+	    return false;
+	}
+	return isParentConsistent(x.getLeft()) && isParentConsistent(x.getRight());
+    }
 }

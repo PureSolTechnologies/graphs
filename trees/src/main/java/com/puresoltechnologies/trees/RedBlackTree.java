@@ -394,6 +394,27 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 	    return x.getKey();
     }
 
+    /**
+     * Returns the largest node with key in the symbol table less than or equal
+     * to <tt>key</tt>.
+     * 
+     * @param key
+     *            the key
+     * @return the largest key in the symbol table less than or equal to
+     *         <tt>key</tt>
+     * @throws NoSuchElementException
+     *             if there is no such key
+     */
+    public RedBlackTreeNode<Key, Value> floorNode(Key key) {
+	if (isEmpty())
+	    throw new NoSuchElementException("called floor() with empty symbol table");
+	RedBlackTreeNode<Key, Value> x = floor(root, key);
+	if (x == null)
+	    return null;
+	else
+	    return x;
+    }
+
     // the largest key in the subtree rooted at x less than or equal to the
     // given key
     private RedBlackTreeNode<Key, Value> floor(RedBlackTreeNode<Key, Value> x, Key key) {
@@ -430,6 +451,27 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 	    return null;
 	else
 	    return x.getKey();
+    }
+
+    /**
+     * Returns the smallest key in the symbol table greater than or equal to
+     * <tt>key</tt>.
+     * 
+     * @param key
+     *            the key
+     * @return the smallest key in the symbol table greater than or equal to
+     *         <tt>key</tt>
+     * @throws NoSuchElementException
+     *             if there is no such key
+     */
+    public RedBlackTreeNode<Key, Value> ceilingNode(Key key) {
+	if (isEmpty())
+	    throw new NoSuchElementException("called ceiling() with empty symbol table");
+	RedBlackTreeNode<Key, Value> x = ceiling(root, key);
+	if (x == null)
+	    return null;
+	else
+	    return x;
     }
 
     // the smallest key in the subtree rooted at x greater than or equal to the
@@ -564,33 +606,4 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 	else
 	    return rank(high) - rank(low);
     }
-
-    /**
-     * This method is used to find the best fitting node for the key in the
-     * tree, which is by comparison the key closest to the original key. If the
-     * actual key is found, than the returned node is the same.
-     * 
-     * @param key
-     *            is the key to look for or to find the nearest key.
-     * @return A {@link RedBlackTreeNode} is returned.
-     */
-    public RedBlackTreeNode<Key, Value> findNearest(Key key) {
-	return findBest(root, key);
-    }
-
-    private RedBlackTreeNode<Key, Value> findBest(RedBlackTreeNode<Key, Value> x, Key key) {
-	RedBlackTreeNode<Key, Value> best = null;
-	while (x != null) {
-	    best = x;
-	    int cmp = key.compareTo(x.getKey());
-	    if (cmp < 0)
-		x = x.getLeft();
-	    else if (cmp > 0)
-		x = x.getRight();
-	    else
-		return x;
-	}
-	return best;
-    }
-
 }

@@ -31,6 +31,21 @@ public class TreePrinter {
      * {@link #TreePrinter(PrintStream)}.
      * 
      * @param tree
+     *            is the {@link Tree} object to be printed.
+     * @param <N>
+     *            is the concrete tree node interface to be used.
+     */
+    public <N extends TreeNode<N>> void println(Tree<N> tree) {
+	List<Boolean> links = new ArrayList<>();
+	println(tree.getRootNode(), links, false);
+    }
+
+    /**
+     * This method is used to print the tree provided into the
+     * {@link PrintStream} set in the constructor
+     * {@link #TreePrinter(PrintStream)}.
+     * 
+     * @param tree
      *            is the {@link TreeNode} object to be printed.
      * @param <N>
      *            is the concrete tree node interface to be used.
