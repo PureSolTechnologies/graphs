@@ -39,7 +39,7 @@ public class RedBlackTreeTest {
 	    buffer.append(tree.get(key));
 	}
 	assertEquals("A=8;C=4;E=12;H=5;L=11;M=9;P=10;R=3;S=0;X=7", buffer.toString());
-	assertTrue(tree.check());
+	assertTrue(new RedBlackTreeTester<>(tree).check());
 
 	TreePrinter printer = new TreePrinter(System.out);
 	printer.println(tree.getRootNode());
@@ -56,10 +56,11 @@ public class RedBlackTreeTest {
 	for (int number : numbers) {
 	    tree.put(number, number * 10);
 	}
-
-	TreePrinter printer = new TreePrinter(System.out);
-	printer.println(tree.getRootNode());
-
+	assertTrue(new RedBlackTreeTester<>(tree).check());
+	//
+	// TreePrinter printer = new TreePrinter(System.out);
+	// printer.println(tree.getRootNode());
+	//
     }
 
 }

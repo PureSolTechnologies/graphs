@@ -33,13 +33,13 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
     }
 
     // number of RedBlackTreeNode in subtree rooted at x; 0 if x is null
-    private int size(RedBlackTreeNode<Key, Value> x) {
+    int size(RedBlackTreeNode<Key, Value> x) {
 	if (x == null)
 	    return 0;
 	return x.getSize();
     }
 
-    private boolean isRed(RedBlackTreeNode<Key, Value> x) {
+    boolean isRed(RedBlackTreeNode<Key, Value> x) {
 	if (x == null) {
 	    return false;
 	}
@@ -565,112 +565,32 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 	    return rank(high) - rank(low);
     }
 
-    /***************************************************************************
-     * Check integrity of red-black tree data structure.
-     ***************************************************************************/
-    public boolean check() {
-	if (!isBST()) {
-	    System.err.println("Not in symmetric order");
-	    return false;
-	}
-	if (!isSizeConsistent()) {
-	    System.err.println("Subtree counts not consistent");
-	    return false;
-	}
-	if (!isRankConsistent()) {
-	    System.err.println("Ranks not consistent");
-	    return false;
-	}
-	if (!is23()) {
-	    System.err.println("Not a 2-3 tree");
-	    return false;
-	}
-	if (!isBalanced()) {
-	    System.out.println("Not balanced");
-	    return false;
-	}
-	return true;
+    /**
+     * This method is used to find the best fitting node for the key in the
+     * tree, which is by comparison the key closest to the original key. If the
+     * actual key is found, than the returned node is the same.
+     * 
+     * @param key
+     *            is the key to look for or to find the nearest key.
+     * @return A {@link RedBlackTreeNode} is returned.
+     */
+    public RedBlackTreeNode<Key, Value> findNearest(Key key) {
+	return findBest(root, key);
     }
 
-    // does this binary tree satisfy symmetric order?
-    // Note: this test also ensures that data structure is a binary tree since
-    // order is strict
-    private boolean isBST() {
-	return isBST(root, null, null);
-    }
-
-    // is the tree rooted at x a BST with all keys strictly between min and max
-    // (if min or max is null, treat as empty constraint)
-    // Credit: Bob Dondero's elegant solution
-    private boolean isBST(RedBlackTreeNode<Key, Value> x, Key min, Key max) {
-	if (x == null)
-	    return true;
-	if (min != null && x.getKey().compareTo(min) <= 0)
-	    return false;
-	if (max != null && x.getKey().compareTo(max) >= 0)
-	    return false;
-	return isBST(x.getLeft(), min, x.getKey()) && isBST(x.getRight(), x.getKey(), max);
-    }
-
-    // are the size fields correct?
-    private boolean isSizeConsistent() {
-	return isSizeConsistent(root);
-    }
-
-    private boolean isSizeConsistent(RedBlackTreeNode<Key, Value> x) {
-	if (x == null)
-	    return true;
-	if (x.getSize() != size(x.getLeft()) + size(x.getRight()) + 1)
-	    return false;
-	return isSizeConsistent(x.getLeft()) && isSizeConsistent(x.getRight());
-    }
-
-    // check that ranks are consistent
-    private boolean isRankConsistent() {
-	for (int i = 0; i < size(); i++)
-	    if (i != rank(select(i)))
-		return false;
-	for (Key key : keys())
-	    if (key.compareTo(select(rank(key))) != 0)
-		return false;
-	return true;
-    }
-
-    // Does the tree have no red right links, and at most one (left)
-    // red links in a row on any path?
-    private boolean is23() {
-	return is23(root);
-    }
-
-    private boolean is23(RedBlackTreeNode<Key, Value> x) {
-	if (x == null)
-	    return true;
-	if (isRed(x.getRight()))
-	    return false;
-	if (x != root && isRed(x) && isRed(x.getLeft()))
-	    return false;
-	return is23(x.getLeft()) && is23(x.getRight());
-    }
-
-    // do all paths from root to leaf have same number of black edges?
-    private boolean isBalanced() {
-	int black = 0; // number of black links on path from root to min
-	RedBlackTreeNode<Key, Value> x = root;
+    private RedBlackTreeNode<Key, Value> findBest(RedBlackTreeNode<Key, Value> x, Key key) {
+	RedBlackTreeNode<Key, Value> best = null;
 	while (x != null) {
-	    if (!isRed(x))
-		black++;
-	    x = x.getLeft();
+	    best = x;
+	    int cmp = key.compareTo(x.getKey());
+	    if (cmp < 0)
+		x = x.getLeft();
+	    else if (cmp > 0)
+		x = x.getRight();
+	    else
+		return x;
 	}
-	return isBalanced(root, black);
+	return best;
     }
 
-    // does every path from the root to a leaf have the given number of black
-    // links?
-    private boolean isBalanced(RedBlackTreeNode<Key, Value> x, int black) {
-	if (x == null)
-	    return black == 0;
-	if (!isRed(x))
-	    black--;
-	return isBalanced(x.getLeft(), black) && isBalanced(x.getRight(), black);
-    }
 }
