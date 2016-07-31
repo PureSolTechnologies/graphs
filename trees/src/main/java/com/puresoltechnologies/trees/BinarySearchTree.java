@@ -1,6 +1,7 @@
 package com.puresoltechnologies.trees;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -17,9 +18,13 @@ import java.util.Set;
  *            is the associated value of the node.
  */
 public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, Key extends Comparable<Key>, Value>
-	implements Tree<N> {
+	implements Tree<N>, Iterable<N> {
 
     protected N root;
+
+    public void clear() {
+	root = null;
+    }
 
     @Override
     public N getRootNode() {
@@ -48,6 +53,11 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
      */
     public boolean isEmpty() {
 	return root == null;
+    }
+
+    @Override
+    public Iterator<N> iterator() {
+	return new BinarySearchTreeIterator<>(root);
     }
 
     /**

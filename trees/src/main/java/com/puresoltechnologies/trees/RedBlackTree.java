@@ -68,6 +68,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 	    return;
 	}
 	root = put(root, key, value);
+	root.setParent(null);
 	root.setColor(BLACK);
     }
 
@@ -115,8 +116,10 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 	    root.setColor(RED);
 
 	root = deleteMin(root);
-	if (!isEmpty())
+	if (!isEmpty()) {
+	    root.setParent(null);
 	    root.setColor(BLACK);
+	}
 	// assert check();
     }
 
@@ -148,6 +151,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 
 	root = deleteMax(root);
 	if (!isEmpty()) {
+	    root.setParent(null);
 	    root.setColor(BLACK);
 	}
 	// assert check();
@@ -189,8 +193,10 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 	}
 
 	root = delete(root, key);
-	if (!isEmpty())
+	if (!isEmpty()) {
+	    root.setParent(null);
 	    root.setColor(BLACK);
+	}
 	// assert check();
     }
 

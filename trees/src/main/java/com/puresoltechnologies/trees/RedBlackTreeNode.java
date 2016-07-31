@@ -89,7 +89,7 @@ public class RedBlackTreeNode<Key extends Comparable<Key>, Value>
 	return parent;
     }
 
-    private void setParent(RedBlackTreeNode<Key, Value> parent) {
+    void setParent(RedBlackTreeNode<Key, Value> parent) {
 	this.parent = parent;
     }
 
