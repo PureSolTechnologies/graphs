@@ -12,6 +12,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.puresoltechnologies.commons</groupId>
+			<artifactId>misc</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.puresoltechnologies.graphs</groupId>
 			<artifactId>graph</artifactId>
 		</dependency>

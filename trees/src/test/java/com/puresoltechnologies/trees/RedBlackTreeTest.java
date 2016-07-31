@@ -89,7 +89,7 @@ public class RedBlackTreeTest {
 	long a = 0;
 	long b = 1;
 	System.out.print("0; 1");
-	for (int i = 3; i <= 11; ++i) {
+	for (int i = 3; i <= 21; ++i) {
 	    long f = a + b;
 	    System.out.print("; " + f);
 	    tree.put(f, i);
@@ -97,7 +97,7 @@ public class RedBlackTreeTest {
 	    b = f;
 	}
 	System.out.println();
-	assertEquals(10, tree.getRootNode().getSize());
+	assertEquals(20, tree.getRootNode().getSize());
 	assertTrue(new RedBlackTreeTester<>(tree).check());
 	new TreePrinter(System.out).println(tree);
 	Iterator<RedBlackTreeNode<Long, Integer>> iterator = tree.iterator();
@@ -112,6 +112,6 @@ public class RedBlackTreeTest {
 	    assertTrue(node.getKey() > lastNode.getKey());
 	    lastNode = node;
 	}
-	assertEquals(10, count);
+	assertEquals(20, count);
     }
 }

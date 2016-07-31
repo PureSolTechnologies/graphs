@@ -1,8 +1,9 @@
 package com.puresoltechnologies.trees;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
+
+import com.puresoltechnologies.commons.misc.PeekingIterator;
 
 /**
  * This is a base implementation of a binary search tree.
@@ -56,7 +57,7 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
     }
 
     @Override
-    public Iterator<N> iterator() {
+    public PeekingIterator<N> iterator() {
 	return new BinarySearchTreeIterator<>(root);
     }
 

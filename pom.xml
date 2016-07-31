@@ -8,7 +8,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<officalName>Graphs</officalName>
-		<commons.version>0.6.0</commons.version>
+		<commons.version>0.7.0-SNAPSHOT</commons.version>
 	</properties>
 
 	<parent>
@@ -80,6 +80,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>com.puresoltechnologies.commons</groupId>
+				<artifactId>misc</artifactId>
+				<version>${commons.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.puresoltechnologies.commons</groupId>
 				<artifactId>osgi</artifactId>
