@@ -8,30 +8,65 @@ public class BinarySearchTreeIterator<N extends BinaryTreeNode<N, Key, Value>, K
 	implements PeekingIterator<N> {
 
     private final N root;
-    private Stack<N> rightSideToBeVisited = new Stack<>();
+    private final Key startKey;
+    private final Key endKey;
+    private Stack<N> stack = new Stack<>();
 
     public BinarySearchTreeIterator(N root) {
 	super();
 	this.root = root;
+	this.startKey = null;
+	this.endKey = null;
 	N currentNode = this.root;
 	while (currentNode != null) {
-	    rightSideToBeVisited.push(currentNode);
+	    stack.push(currentNode);
 	    currentNode = currentNode.getLeft();
+	}
+    }
+
+    public BinarySearchTreeIterator(N root, Key startKey, Key endKey) {
+	super();
+	this.root = root;
+	this.startKey = startKey;
+	this.endKey = endKey;
+	N currentNode = this.root;
+	while ((currentNode != null) && (!currentNode.getKey().equals(startKey))) {
+	    if (currentNode.getKey().compareTo(startKey) > 0) {
+		stack.push(currentNode);
+		currentNode = currentNode.getLeft();
+	    } else {
+		currentNode = currentNode.getRight();
+	    }
+	}
+	if ((currentNode != null) && (currentNode.getKey().compareTo(startKey) >= 0)) {
+	    stack.push(currentNode);
 	}
     }
 
     @Override
     public boolean hasNext() {
-	return !rightSideToBeVisited.isEmpty();
+	if (stack.isEmpty()) {
+	    return false;
+	}
+	if (endKey == null) {
+	    return true;
+	}
+	return peek() != null;
     }
 
     @Override
     public N next() {
-	N result = rightSideToBeVisited.pop();
+	N result = stack.pop();
+	if (endKey != null) {
+	    if (result.getKey().compareTo(endKey) > 0) {
+		stack.clear();
+		return null;
+	    }
+	}
 	if (result.getRight() != null) {
 	    N currentNode = result.getRight();
 	    while (currentNode != null) {
-		rightSideToBeVisited.push(currentNode);
+		stack.push(currentNode);
 		currentNode = currentNode.getLeft();
 	    }
 	}
@@ -40,10 +75,17 @@ public class BinarySearchTreeIterator<N extends BinaryTreeNode<N, Key, Value>, K
 
     @Override
     public N peek() {
-	if (rightSideToBeVisited.isEmpty()) {
+	if (stack.isEmpty()) {
 	    return null;
 	}
-	return rightSideToBeVisited.peek();
+	N peeked = stack.peek();
+	if (endKey != null) {
+	    if (peeked.getKey().compareTo(endKey) > 0) {
+		stack.clear();
+		return null;
+	    }
+	}
+	return peeked;
     }
 
 }

@@ -114,4 +114,38 @@ public class RedBlackTreeTest {
 	}
 	assertEquals(20, count);
     }
+
+    @Test
+    public void testIteratorWithStartAndStop() {
+	RedBlackTree<Long, Integer> tree = new RedBlackTree<>();
+	tree.put(0l, 0);
+	tree.put(1l, 1);
+	long a = 0;
+	long b = 1;
+	System.out.print("0; 1");
+	for (int i = 3; i <= 21; ++i) {
+	    long f = a + b;
+	    System.out.print("; " + f);
+	    tree.put(f, i);
+	    a = b;
+	    b = f;
+	}
+	System.out.println();
+	assertEquals(20, tree.getRootNode().getSize());
+	assertTrue(new RedBlackTreeTester<>(tree).check());
+	new TreePrinter(System.out).println(tree);
+	Iterator<RedBlackTreeNode<Long, Integer>> iterator = tree.iterator(4l, 1000l);
+	assertTrue(iterator.hasNext());
+	RedBlackTreeNode<Long, Integer> lastNode = iterator.next();
+	System.out.println(lastNode.getKey());
+	int count = 1;
+	while (iterator.hasNext()) {
+	    count++;
+	    RedBlackTreeNode<Long, Integer> node = iterator.next();
+	    System.out.println(node.getKey() + " (" + count + ")");
+	    assertTrue(node.getKey() > lastNode.getKey());
+	    lastNode = node;
+	}
+	assertEquals(12, count);
+    }
 }

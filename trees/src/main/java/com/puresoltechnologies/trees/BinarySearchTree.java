@@ -61,6 +61,10 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
 	return new BinarySearchTreeIterator<>(root);
     }
 
+    public PeekingIterator<N> iterator(Key start, Key end) {
+	return new BinarySearchTreeIterator<>(root, start, end);
+    }
+
     /**
      * Returns the value associated with the given key. The retrieval is done by
      * normal recursive binary search.
