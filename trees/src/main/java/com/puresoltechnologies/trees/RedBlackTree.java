@@ -412,30 +412,36 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      *             if there is no such key
      */
     public RedBlackTreeNode<Key, Value> floorNode(Key key) {
-	if (isEmpty())
-	    throw new NoSuchElementException("called floor() with empty symbol table");
-	RedBlackTreeNode<Key, Value> x = floor(root, key);
-	if (x == null)
+	if (isEmpty()) {
 	    return null;
-	else
+	}
+	RedBlackTreeNode<Key, Value> x = floor(root, key);
+	if (x == null) {
+	    return null;
+	} else {
 	    return x;
+	}
     }
 
     // the largest key in the subtree rooted at x less than or equal to the
     // given key
     private RedBlackTreeNode<Key, Value> floor(RedBlackTreeNode<Key, Value> x, Key key) {
-	if (x == null)
+	if (x == null) {
 	    return null;
+	}
 	int cmp = key.compareTo(x.getKey());
-	if (cmp == 0)
+	if (cmp == 0) {
 	    return x;
-	if (cmp < 0)
+	}
+	if (cmp < 0) {
 	    return floor(x.getLeft(), key);
+	}
 	RedBlackTreeNode<Key, Value> t = floor(x.getRight(), key);
-	if (t != null)
+	if (t != null) {
 	    return t;
-	else
+	} else {
 	    return x;
+	}
     }
 
     /**
@@ -471,30 +477,36 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      *             if there is no such key
      */
     public RedBlackTreeNode<Key, Value> ceilingNode(Key key) {
-	if (isEmpty())
-	    throw new NoSuchElementException("called ceiling() with empty symbol table");
-	RedBlackTreeNode<Key, Value> x = ceiling(root, key);
-	if (x == null)
+	if (isEmpty()) {
 	    return null;
-	else
+	}
+	RedBlackTreeNode<Key, Value> x = ceiling(root, key);
+	if (x == null) {
+	    return null;
+	} else {
 	    return x;
+	}
     }
 
     // the smallest key in the subtree rooted at x greater than or equal to the
     // given key
     private RedBlackTreeNode<Key, Value> ceiling(RedBlackTreeNode<Key, Value> x, Key key) {
-	if (x == null)
+	if (x == null) {
 	    return null;
+	}
 	int cmp = key.compareTo(x.getKey());
-	if (cmp == 0)
+	if (cmp == 0) {
 	    return x;
-	if (cmp > 0)
+	}
+	if (cmp > 0) {
 	    return ceiling(x.getRight(), key);
+	}
 	RedBlackTreeNode<Key, Value> t = ceiling(x.getLeft(), key);
-	if (t != null)
+	if (t != null) {
 	    return t;
-	else
+	} else {
 	    return x;
+	}
     }
 
     /**
