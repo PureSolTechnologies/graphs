@@ -31,14 +31,14 @@ public class BinarySearchTreeIterator<N extends BinaryTreeNode<N, Key, Value>, K
 	this.endKey = endKey;
 	N currentNode = this.root;
 	while ((currentNode != null) && (!currentNode.getKey().equals(startKey))) {
-	    if (currentNode.getKey().compareTo(startKey) > 0) {
+	    if ((startKey == null) || (currentNode.getKey().compareTo(startKey) > 0)) {
 		stack.push(currentNode);
 		currentNode = currentNode.getLeft();
 	    } else {
 		currentNode = currentNode.getRight();
 	    }
 	}
-	if ((currentNode != null) && (currentNode.getKey().compareTo(startKey) >= 0)) {
+	if ((currentNode != null) && ((startKey == null) || (currentNode.getKey().compareTo(startKey) >= 0))) {
 	    stack.push(currentNode);
 	}
     }
