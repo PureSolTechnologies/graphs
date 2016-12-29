@@ -9,8 +9,7 @@ import com.puresoltechnologies.graph.Vertex;
  * 
  * @author Rick-Rainer Ludwig
  */
-public interface State<S extends State<S, T>, T extends Transition<S, T>>
-	extends Vertex<S, T> {
+public interface State<S extends State<S, T>, T extends Transition<S, T>> extends Vertex<S, T> {
 
     /**
      * This method returns the localized name of the state which is needed to be
@@ -31,4 +30,8 @@ public interface State<S extends State<S, T>, T extends Transition<S, T>>
      */
     public Set<T> getTransitions();
 
+    @Override
+    public default Set<T> getEdges() {
+	return getTransitions();
+    }
 }

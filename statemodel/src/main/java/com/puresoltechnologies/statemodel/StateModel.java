@@ -9,8 +9,7 @@ import com.puresoltechnologies.graph.Graph;
  * 
  * @author Rick-Rainer Ludwig
  */
-public interface StateModel<S extends State<S, T>, T extends Transition<S, T>>
-	extends Graph<S, T> {
+public interface StateModel<S extends State<S, T>, T extends Transition<S, T>> extends Graph<S, T> {
 
     /**
      * This method returns the start state which is not valid, yet, but the
@@ -69,4 +68,27 @@ public interface StateModel<S extends State<S, T>, T extends Transition<S, T>>
      */
     public void performTransition(T transition);
 
+    /**
+     * This method checks the available transitions and looks for a transition
+     * to go the defined state.
+     * 
+     * @param state
+     *            is the state to go to.
+     * @return A transition is returned in case there is a valid transition to
+     *         the given state. <code>null</code> is returned in case there is
+     *         not valid transition available.
+     */
+    public T canGoTo(S state);
+
+    /**
+     * This method checks the available transitions and looks for a transition
+     * to go the defined state.
+     * 
+     * @param state
+     *            is the state to go to.
+     * @throws IllegalStateException
+     *             is throw in case there is no valid transition to reach the
+     *             requested state.
+     */
+    public void goTo(S state);
 }

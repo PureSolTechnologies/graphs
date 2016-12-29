@@ -53,11 +53,30 @@ public abstract class AbstractStateModel<S extends State<S, T>, T extends Transi
     @Override
     public final void performTransition(T transition) {
 	if (!canPerformTransition(transition)) {
-	    throw new IllegalStateException("Transition '"
-		    + transition.getName() + "' is not allowed in state '"
+	    throw new IllegalStateException("Transition '" + transition.getName() + "' is not allowed in state '"
 		    + currentState.getName() + "'");
 	}
 	currentState = transition.getTargetState();
     }
 
+    @Override
+    public T canGoTo(S state) {
+	for (T transition : currentState.getTransitions()) {
+	    if (transition.getTargetState() == state) {
+		return transition;
+	    }
+	}
+	return null;
+    }
+
+    @Override
+    public void goTo(S state) {
+	for (T transition : currentState.getTransitions()) {
+	    if (transition.getTargetState() == state) {
+		performTransition(transition);
+	    }
+	}
+	throw new IllegalStateException(
+		"No transition is allowed from state '" + currentState.getName() + "' to state '" + state + "'.");
+    }
 }
