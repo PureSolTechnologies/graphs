@@ -2,7 +2,7 @@ package com.puresoltechnologies.trees;
 
 import java.util.Stack;
 
-import com.puresoltechnologies.commons.misc.PeekingIterator;
+import com.puresoltechnologies.streaming.PeekingIterator;
 
 public class BinarySearchTreeIterator<N extends BinaryTreeNode<N, Key, Value>, Key extends Comparable<Key>, Value>
 	implements PeekingIterator<N> {

@@ -9,6 +9,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<officalName>Graphs</officalName>
 		<commons.version>0.7.0-SNAPSHOT</commons.version>
+		<streaming.version>0.1.0-SNAPSHOT</streaming.version>
 	</properties>
 
 	<parent>
@@ -104,6 +105,11 @@
 				<groupId>com.puresoltechnologies.graphs</groupId>
 				<artifactId>trees</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.puresoltechnologies.streaming</groupId>
+				<artifactId>streaming</artifactId>
+				<version>${streaming.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.osgi</groupId>

@@ -3,7 +3,7 @@ package com.puresoltechnologies.trees;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.puresoltechnologies.commons.misc.PeekingIterator;
+import com.puresoltechnologies.streaming.PeekingIterator;
 
 /**
  * This is a base implementation of a binary search tree.

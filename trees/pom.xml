@@ -20,6 +20,10 @@
 			<artifactId>graph</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.puresoltechnologies.streaming</groupId>
+			<artifactId>streaming</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
