@@ -6,15 +6,18 @@ package com.puresoltechnologies.trees;
  * @author Rick-Rainer Ludwig
  *
  * @param <N>
+ *            is the node type
  * @param <Key>
+ *            is the property key type.
  * @param <Value>
+ *            is the property value type.
  */
 public interface BinaryTreeNode<N extends BinaryTreeNode<N, Key, Value>, Key extends Comparable<Key>, Value>
 	extends TreeNode<N> {
 
     /**
-     * This method returns the key of the node which is used to compare and sort
-     * the nodes within the tree.
+     * This method returns the key of the node which is used to compare and sort the
+     * nodes within the tree.
      * 
      * @return The key is returned.
      */

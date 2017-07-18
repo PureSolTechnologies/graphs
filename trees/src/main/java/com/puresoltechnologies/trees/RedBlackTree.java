@@ -10,12 +10,14 @@ import java.util.Queue;
 /**
  * This is a RedBlackTree implementation based on {@link BinarySearchTree}.
  * 
- * @see http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+ * see: http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
  * 
  * @author Rick-Rainer Ludwig
  *
  * @param <Key>
+ *            is the property key type.
  * @param <Value>
+ *            is the property value type.
  */
 public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 	BinarySearchTree<RedBlackTreeNode<Key, Value>, Key, Value> implements Tree<RedBlackTreeNode<Key, Value>> {
@@ -24,9 +26,9 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 	super();
     }
 
-    /***************************************************************************
+    /*
      * Node helper methods.
-     ***************************************************************************/
+     */
 
     public int size() {
 	return size(root);
@@ -51,10 +53,10 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      ***************************************************************************/
 
     /**
-     * Inserts the specified key-value pair into the symbol table, overwriting
-     * the old value with the new value if the symbol table already contains the
-     * specified key. Deletes the specified key (and its associated value) from
-     * this symbol table if the specified value is <tt>null</tt>.
+     * Inserts the specified key-value pair into the symbol table, overwriting the
+     * old value with the new value if the symbol table already contains the
+     * specified key. Deletes the specified key (and its associated value) from this
+     * symbol table if the specified value is <tt>null</tt>.
      *
      * @param key
      *            the key
@@ -174,8 +176,8 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
     }
 
     /**
-     * Removes the specified key and its associated value from this symbol table
-     * (if the key is in this symbol table).
+     * Removes the specified key and its associated value from this symbol table (if
+     * the key is in this symbol table).
      *
      * @param key
      *            the key
@@ -401,8 +403,8 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
     }
 
     /**
-     * Returns the largest node with key in the symbol table less than or equal
-     * to <tt>key</tt>.
+     * Returns the largest node with key in the symbol table less than or equal to
+     * <tt>key</tt>.
      * 
      * @param key
      *            the key
@@ -569,9 +571,9 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      ***************************************************************************/
 
     /**
-     * Returns all keys in the symbol table as an <tt>Iterable</tt>. To iterate
-     * over all of the keys in the symbol table named <tt>st</tt>, use the
-     * foreach notation: <tt>for (Key key : st.keys())</tt>.
+     * Returns all keys in the symbol table as an <tt>Iterable</tt>. To iterate over
+     * all of the keys in the symbol table named <tt>st</tt>, use the foreach
+     * notation: <tt>for (Key key : st.keys())</tt>.
      * 
      * @return all keys in the sybol table as an <tt>Iterable</tt>
      */
@@ -585,6 +587,10 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      * Returns all keys in the symbol table in the given range, as an
      * <tt>Iterable</tt>.
      * 
+     * @param lo
+     *            is the lower border.
+     * @param hi
+     *            is the upper border.
      * @return all keys in the sybol table between <tt>lo</tt> (inclusive) and
      *         <tt>hi</tt> (exclusive) as an <tt>Iterable</tt>
      */
@@ -613,6 +619,10 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
     /**
      * Returns the number of keys in the symbol table in the given range.
      * 
+     * @param low
+     *            is the lower border.
+     * @param high
+     *            is the upper border.
      * @return the number of keys in the symbol table between <tt>low</tt>
      *         (inclusive) and <tt>high</tt> (exclusive)
      */
