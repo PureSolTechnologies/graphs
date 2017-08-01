@@ -3,7 +3,7 @@ package com.puresoltechnologies.trees;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.puresoltechnologies.streaming.PeekingIterator;
+import com.puresoltechnologies.streaming.StreamIterator;
 
 /**
  * This is a base implementation of a binary search tree.
@@ -57,11 +57,11 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
     }
 
     @Override
-    public PeekingIterator<N> iterator() {
+    public StreamIterator<N> iterator() {
 	return new BinarySearchTreeIterator<>(root);
     }
 
-    public PeekingIterator<N> iterator(Key start, Key end) {
+    public StreamIterator<N> iterator(Key start, Key end) {
 	return new BinarySearchTreeIterator<>(root, start, end);
     }
 
