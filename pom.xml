@@ -6,7 +6,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<officalName>Graphs</officalName>
 		<commons.version>0.7.0-SNAPSHOT</commons.version>
-		<streaming.version>0.3.0-SNAPSHOT</streaming.version>
+		<streaming.version>0.4.0-SNAPSHOT</streaming.version>
 	</properties>
 
 	<groupId>com.puresoltechnologies.graphs</groupId>
@@ -99,7 +99,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.puresoltechnologies.streaming</groupId>
-				<artifactId>streaming</artifactId>
+				<artifactId>iterators</artifactId>
 				<version>${streaming.version}</version>
 			</dependency>
 			<dependency>

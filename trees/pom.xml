@@ -21,7 +21,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.puresoltechnologies.streaming</groupId>
-			<artifactId>streaming</artifactId>
+			<artifactId>iterators</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
