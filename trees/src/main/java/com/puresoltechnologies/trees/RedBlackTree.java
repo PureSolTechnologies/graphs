@@ -12,6 +12,8 @@ import java.util.Queue;
  * 
  * see: http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
  * 
+ * This implementation is not thread-safe.
+ * 
  * @author Rick-Rainer Ludwig
  *
  * @param <Key>

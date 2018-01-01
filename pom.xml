@@ -237,8 +237,20 @@
 				<artifactId>maven-bundle-plugin</artifactId>
 				<version>3.3.0</version>
 				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>bundle</id>
+						<goals>
+							<goal>bundle</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<manifestLocation>META-INF</manifestLocation>
+					<niceManifest>true</niceManifest>
+					<supportedProjectTypes>
+						<supportedProjectType>jar</supportedProjectType>
+						<supportedProjectType>bundle</supportedProjectType>
+					</supportedProjectTypes>
 					<instructions>
 						<Specification-Title>${project.name}</Specification-Title>
 						<Specification-Version>${project.version}</Specification-Version>
@@ -250,18 +262,18 @@
 						<Project-URL>${project.url}</Project-URL>
 						<!-- The Bundle-SymbolicName is fixed in this way. Otherwise Tycho 
 							will not find the bundle. -->
-						<Bundle-SymbolicName>${bundle.namespace}.bundle</Bundle-SymbolicName>
-						<Bundle-Name>${bundle.namespace}.bundle</Bundle-Name>
+						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}.bundle</Bundle-SymbolicName>
+						<Bundle-Name>${project.groupId}.${project.artifactId}.bundle</Bundle-Name>
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-Vendor>${project.organization.name}</Bundle-Vendor>
-						<Export-Package>${bundle.namespace}.*;version="${project.version}"</Export-Package>
-						<Bundle-Activator>${bundle.namespace}.Activator</Bundle-Activator>
 						<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 						<!-- embed compile/runtime dependencies using path that matches the 
 							copied dependency folder -->
-						<Embed-Dependency>*;scope=compile|runtime;inline=false</Embed-Dependency>
+						<Embed-Dependency>*;scope=compile|runtime;type=!pom;inline=false</Embed-Dependency>
 						<Embed-Directory>dependencies</Embed-Directory>
-						<Embed-StripGroup>true</Embed-StripGroup>
+						<Embed-StripGroup>false</Embed-StripGroup>
+						<Embed-StripVersion>false</Embed-StripVersion>
+						<Embed-Transitive>true</Embed-Transitive>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -364,11 +376,8 @@
 
 	<modules>
 		<module>graph</module>
-		<module>graph.bundle</module>
 		<module>trees</module>
-		<module>trees.bundle</module>
 		<module>statemodel</module>
-		<module>statemodel.bundle</module>
 	</modules>
 
 </project>
