@@ -17,7 +17,7 @@
 	<name>${officalName} - ${project.artifactId}</name>
 	<description>PureSol Technologies' commons libraries</description>
 	<inceptionYear>2014</inceptionYear>
-	<url>http://opensource.puresol-technologies.com/commons</url>
+	<url>http://opensource.puresol-technologies.com/graphs</url>
 
 	<organization>
 		<name>PureSol Technologies</name>
