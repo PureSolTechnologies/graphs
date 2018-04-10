@@ -1,13 +1,10 @@
 package com.puresoltechnologies.graphs.trees;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
-import org.junit.Test;
-
-import com.puresoltechnologies.graphs.trees.TreeWalker;
-import com.puresoltechnologies.graphs.trees.WalkingAction;
+import org.junit.jupiter.api.Test;
 
 public class TreeWalkerTest {
 
@@ -29,8 +26,7 @@ public class TreeWalkerTest {
 	TreeWalker<TestTreeNodeImpl> walker = new TreeWalker<TestTreeNodeImpl>(tree);
 	TreeVisitorTestImpl visitor = new TreeVisitorTestImpl();
 	walker.walk(visitor);
-	assertEquals("rootn1n11n12n13n2n21n22n23n3n31n32n33",
-		visitor.getNodeString());
+	assertEquals("rootn1n11n12n13n2n21n22n23n3n31n32n33", visitor.getNodeString());
     }
 
     @Test
@@ -59,8 +55,7 @@ public class TreeWalkerTest {
 	TreeWalker<TestTreeNodeImpl> walker = new TreeWalker<TestTreeNodeImpl>(tree);
 	TreeVisitorTestImpl visitor = new TreeVisitorTestImpl();
 	walker.walkBackward(visitor);
-	assertEquals("n33n32n31n3n23n22n21n2n13n12n11n1root",
-		visitor.getNodeString());
+	assertEquals("n33n32n31n3n23n22n21n2n13n12n11n1root", visitor.getNodeString());
     }
 
     @Test

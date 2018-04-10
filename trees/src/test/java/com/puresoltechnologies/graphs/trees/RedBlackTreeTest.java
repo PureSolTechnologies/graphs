@@ -1,7 +1,7 @@
 package com.puresoltechnologies.graphs.trees;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,11 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import org.junit.Test;
-
-import com.puresoltechnologies.graphs.trees.RedBlackTree;
-import com.puresoltechnologies.graphs.trees.RedBlackTreeNode;
-import com.puresoltechnologies.graphs.trees.TreePrinter;
+import org.junit.jupiter.api.Test;
 
 public class RedBlackTreeTest {
 

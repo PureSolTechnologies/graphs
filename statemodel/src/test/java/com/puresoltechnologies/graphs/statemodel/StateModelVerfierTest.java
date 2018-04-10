@@ -6,17 +6,10 @@ import static org.mockito.Mockito.when;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import com.puresoltechnologies.graphs.statemodel.StateModelException;
-import com.puresoltechnologies.graphs.statemodel.StateModelVerfier;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class StateModelVerfierTest {
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     private TestStateModel createModelSkeleton() {
 	TestState startState = mock(TestState.class);
@@ -41,86 +34,73 @@ public class StateModelVerfierTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenStartStateIsNull()
-	    throws StateModelException {
-	expectedException.expect(StateModelException.class);
-	expectedException.expectMessage("No start state is defined.");
-	TestStateModel stateModel = createModelSkeleton();
-	when(stateModel.getStartState()).thenReturn(null);
-	StateModelVerfier.verifyModel(stateModel);
+    public void shouldThrowExceptionWhenStartStateIsNull() throws StateModelException {
+	Assertions.assertThrows(StateModelException.class, () -> {
+	    TestStateModel stateModel = createModelSkeleton();
+	    when(stateModel.getStartState()).thenReturn(null);
+	    StateModelVerfier.verifyModel(stateModel);
+	}, "No start state is defined.");
     }
 
     @Test
-    public void shouldThrowExceptionWhenStartStateHasNoTransitionsWithNull()
-	    throws StateModelException {
-	expectedException.expect(StateModelException.class);
-	expectedException
-		.expectMessage("No transition(s) for start state is/are defined, but an invalid null is returned.");
-	TestStateModel stateModel = createModelSkeleton();
-	when(stateModel.getStartState().getTransitions()).thenReturn(null);
-	StateModelVerfier.verifyModel(stateModel);
+    public void shouldThrowExceptionWhenStartStateHasNoTransitionsWithNull() throws StateModelException {
+	Assertions.assertThrows(StateModelException.class, () -> {
+	    TestStateModel stateModel = createModelSkeleton();
+	    when(stateModel.getStartState().getTransitions()).thenReturn(null);
+	    StateModelVerfier.verifyModel(stateModel);
+	}, "No transition(s) for start state is/are defined, but an invalid null is returned.");
     }
 
     @Test
-    public void shouldThrowExceptionWhenStartStateHasNoTransitions()
-	    throws StateModelException {
-	expectedException.expect(StateModelException.class);
-	expectedException
-		.expectMessage("No transition(s) for start state is/are defined.");
-	TestStateModel stateModel = createModelSkeleton();
-	when(stateModel.getStartState().getTransitions()).thenReturn(
-		new HashSet<>());
-	StateModelVerfier.verifyModel(stateModel);
+    public void shouldThrowExceptionWhenStartStateHasNoTransitions() throws StateModelException {
+	Assertions.assertThrows(StateModelException.class, () -> {
+	    TestStateModel stateModel = createModelSkeleton();
+	    when(stateModel.getStartState().getTransitions()).thenReturn(new HashSet<>());
+	    StateModelVerfier.verifyModel(stateModel);
+	}, "No transition(s) for start state is/are defined.");
     }
 
     @Test
-    public void shouldThrowExceptionWhenCurrentStateIsNull()
-	    throws StateModelException {
-	expectedException.expect(StateModelException.class);
-	expectedException
-		.expectMessage("The current state is null, but a state model is expected to be in a state all the time.");
-	TestStateModel stateModel = createModelSkeleton();
-	when(stateModel.getState()).thenReturn(null);
-	StateModelVerfier.verifyModel(stateModel);
+    public void shouldThrowExceptionWhenCurrentStateIsNull() throws StateModelException {
+	Assertions.assertThrows(StateModelException.class, () -> {
+	    TestStateModel stateModel = createModelSkeleton();
+	    when(stateModel.getState()).thenReturn(null);
+	    StateModelVerfier.verifyModel(stateModel);
+	}, "The current state is null, but a state model is expected to be in a state all the time.");
     }
 
     @Test
-    public void shouldThrowExceptionWhenEndStatesSetIsNull()
-	    throws StateModelException {
-	expectedException.expect(StateModelException.class);
-	expectedException.expectMessage("End states set must not be null.");
-	TestStateModel stateModel = createModelSkeleton();
-	when(stateModel.getEndStates()).thenReturn(null);
-	StateModelVerfier.verifyModel(stateModel);
+    public void shouldThrowExceptionWhenEndStatesSetIsNull() throws StateModelException {
+	Assertions.assertThrows(StateModelException.class, () -> {
+	    TestStateModel stateModel = createModelSkeleton();
+	    when(stateModel.getEndStates()).thenReturn(null);
+	    StateModelVerfier.verifyModel(stateModel);
+	}, "End states set must not be null.");
     }
 
     @Test
-    public void shouldThrowExceptionWhenEndStateHasTransition()
-	    throws StateModelException {
-	expectedException.expect(StateModelException.class);
-	expectedException
-		.expectMessage("Transitions set for an end state is not empty, but is expected to be so.");
-	TestStateModel stateModel = createModelSkeleton();
-	TestState endStateWithTransition = mock(TestState.class);
-	Set<TestTransition> transitions = new HashSet<>();
-	transitions.add(mock(TestTransition.class));
-	when(endStateWithTransition.getTransitions()).thenReturn(transitions);
-	stateModel.getEndStates().add(endStateWithTransition);
-	StateModelVerfier.verifyModel(stateModel);
+    public void shouldThrowExceptionWhenEndStateHasTransition() throws StateModelException {
+	Assertions.assertThrows(StateModelException.class, () -> {
+	    TestStateModel stateModel = createModelSkeleton();
+	    TestState endStateWithTransition = mock(TestState.class);
+	    Set<TestTransition> transitions = new HashSet<>();
+	    transitions.add(mock(TestTransition.class));
+	    when(endStateWithTransition.getTransitions()).thenReturn(transitions);
+	    stateModel.getEndStates().add(endStateWithTransition);
+	    StateModelVerfier.verifyModel(stateModel);
+	}, "Transitions set for an end state is not empty, but is expected to be so.");
     }
 
     @Test
-    public void shouldThrowExceptionWhenEndStateHasTransitionsSetNull()
-	    throws StateModelException {
-	expectedException.expect(StateModelException.class);
-	expectedException
-		.expectMessage("Transitions set for an end state is null, but should return an empty set.");
-	TestStateModel stateModel = createModelSkeleton();
-	TestState endStateWithTransition = mock(TestState.class);
-	Set<TestTransition> transitions = new HashSet<>();
-	when(endStateWithTransition.getTransitions()).thenReturn(null);
-	stateModel.getEndStates().add(endStateWithTransition);
-	StateModelVerfier.verifyModel(stateModel);
+    public void shouldThrowExceptionWhenEndStateHasTransitionsSetNull() throws StateModelException {
+	Assertions.assertThrows(StateModelException.class, () -> {
+	    TestStateModel stateModel = createModelSkeleton();
+	    TestState endStateWithTransition = mock(TestState.class);
+	    Set<TestTransition> transitions = new HashSet<>();
+	    when(endStateWithTransition.getTransitions()).thenReturn(null);
+	    stateModel.getEndStates().add(endStateWithTransition);
+	    StateModelVerfier.verifyModel(stateModel);
+	}, "Transitions set for an end state is null, but should return an empty set.");
     }
 
 }

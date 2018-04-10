@@ -1,38 +1,31 @@
 package com.puresoltechnologies.graphs.graph;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import com.puresoltechnologies.graphs.graph.DeadEndAnalyzer;
+import org.junit.jupiter.api.Test;
 
 public class DeadEndAnalyzerTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     @Test
     public void shouldThrowIllegalArgumentExceptionWhenNoEndStates() {
-	expectedException.expect(IllegalArgumentException.class);
-	expectedException.expectMessage("The model has no end states.");
-	TestGraph graph = mock(TestGraph.class);
-	DeadEndAnalyzer
-		.hasDeadEnds(graph, mock(TestVertex.class), new HashSet<>());
+	assertThrows(IllegalArgumentException.class, () -> {
+	    TestGraph graph = mock(TestGraph.class);
+	    DeadEndAnalyzer.hasDeadEnds(graph, mock(TestVertex.class), new HashSet<>());
+	}, "The model has no end states.");
     }
 
     @Test
     public void shouldThrowIllegalArgumentExceptionWhenEndStatesAreNull() {
-	expectedException.expect(IllegalArgumentException.class);
-	expectedException.expectMessage("The model has no end states.");
-	TestGraph graph = mock(TestGraph.class);
-	DeadEndAnalyzer.hasDeadEnds(graph, mock(TestVertex.class), null);
+	assertThrows(IllegalArgumentException.class, () -> {
+	    TestGraph graph = mock(TestGraph.class);
+	    DeadEndAnalyzer.hasDeadEnds(graph, mock(TestVertex.class), null);
+	}, "The model has no end states.");
     }
 
     @Test
@@ -40,8 +33,7 @@ public class DeadEndAnalyzerTest {
 	TestGraph graph = new TestGraphImpl();
 	TestVertex vertex1 = graph.createVertex();
 
-	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(
-		Arrays.asList(vertex1))));
+	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(Arrays.asList(vertex1))));
     }
 
     /**
@@ -60,8 +52,7 @@ public class DeadEndAnalyzerTest {
 	vertex1.addEdge(vertex2);
 	vertex2.addEdge(vertex3);
 
-	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(
-		Arrays.asList(vertex3))));
+	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(Arrays.asList(vertex3))));
     }
 
     /**
@@ -84,8 +75,7 @@ public class DeadEndAnalyzerTest {
 	vertex2.addEdge(vertex3);
 	vertex2.addEdge(vertex4);
 
-	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(
-		Arrays.asList(vertex3, vertex4))));
+	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(Arrays.asList(vertex3, vertex4))));
     }
 
     /**
@@ -108,8 +98,7 @@ public class DeadEndAnalyzerTest {
 	vertex2.addEdge(vertex3);
 	vertex1.addEdge(vertex4);
 
-	assertTrue(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(
-		Arrays.asList(vertex3))));
+	assertTrue(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(Arrays.asList(vertex3))));
     }
 
     /**
@@ -131,8 +120,7 @@ public class DeadEndAnalyzerTest {
 	state2.addEdge(state3);
 	state2.addEdge(state1);
 
-	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, state1, new HashSet<>(
-		Arrays.asList(state3))));
+	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, state1, new HashSet<>(Arrays.asList(state3))));
     }
 
     /**
@@ -158,8 +146,7 @@ public class DeadEndAnalyzerTest {
 	vertex1.addEdge(vertex4);
 	vertex4.addEdge(vertex1);
 
-	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(
-		Arrays.asList(vertex3))));
+	assertFalse(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(Arrays.asList(vertex3))));
     }
 
     /**
@@ -187,8 +174,7 @@ public class DeadEndAnalyzerTest {
 	vertex4.addEdge(vertex5);
 	vertex5.addEdge(vertex4);
 
-	assertTrue(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(
-		Arrays.asList(vertex3))));
+	assertTrue(DeadEndAnalyzer.hasDeadEnds(graph, vertex1, new HashSet<>(Arrays.asList(vertex3))));
     }
 
 }

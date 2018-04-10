@@ -1,13 +1,8 @@
 package com.puresoltechnologies.graphs.trees;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
-
-import com.puresoltechnologies.graphs.trees.SearchVisitor;
-import com.puresoltechnologies.graphs.trees.TreeNodeImpl;
-import com.puresoltechnologies.graphs.trees.TreeSearchCriterion;
-import com.puresoltechnologies.graphs.trees.TreeWalker;
+import org.junit.jupiter.api.Test;
 
 public class SearchVisitorTest {
 
@@ -42,8 +37,7 @@ public class SearchVisitorTest {
 	for (int i = 1; i <= 10; i++) {
 	    new IntegerTree(tree, i);
 	}
-	SearchVisitor<IntegerTree> search = new SearchVisitor<IntegerTree>(
-		oddCriterion);
+	SearchVisitor<IntegerTree> search = new SearchVisitor<IntegerTree>(oddCriterion);
 	TreeWalker.walk(search, tree);
 	assertEquals(5, search.getSearchResult().size());
     }

@@ -1,11 +1,8 @@
 package com.puresoltechnologies.graphs.trees;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
-
-import com.puresoltechnologies.graphs.trees.TreePrinter;
-import com.puresoltechnologies.graphs.trees.TreeUtils;
+import org.junit.jupiter.api.Test;
 
 public class TreeUtilsTest {
 
