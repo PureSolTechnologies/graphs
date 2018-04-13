@@ -12,16 +12,16 @@ public abstract class AbstractStateModel<S extends State<S, T>, T extends Transi
     private S currentState;
 
     /**
-     * This is the default constructor. It starts the model at the start state
-     * as returned in {@link #getStartState()}.
+     * This is the default constructor. It starts the model at the start state as
+     * returned in {@link #getStartState()}.
      */
     public AbstractStateModel() {
 	super();
     }
 
     /**
-     * This constructor starts at a given initial state. This can be useful in
-     * cases were a model was persisted to restart it.
+     * This constructor starts at a given initial state. This can be useful in cases
+     * were a model was persisted to restart it.
      * 
      * @param initialState
      *            is the state to be set as initial state if not
@@ -74,6 +74,7 @@ public abstract class AbstractStateModel<S extends State<S, T>, T extends Transi
 	for (T transition : currentState.getTransitions()) {
 	    if (transition.getTargetState() == state) {
 		performTransition(transition);
+		return;
 	    }
 	}
 	throw new IllegalStateException(
