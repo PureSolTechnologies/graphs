@@ -2,7 +2,7 @@ package com.puresoltechnologies.graphs.trees;
 
 import java.util.Stack;
 
-import com.puresoltechnologies.streaming.StreamIterator;
+import com.puresoltechnologies.streaming.iterators.StreamIterator;
 
 public class BinarySearchTreeIterator<N extends BinaryTreeNode<N, Key, Value>, Key extends Comparable<Key>, Value>
 	implements StreamIterator<N> {

@@ -7,7 +7,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<officalName>Graphs</officalName>
 		<commons.version>0.7.0-SNAPSHOT</commons.version>
-		<streaming.version>0.4.0-SNAPSHOT</streaming.version>
+		<streaming.version>1.2.0-SNAPSHOT</streaming.version>
 	</properties>
 
 	<groupId>com.puresoltechnologies.graphs</groupId>

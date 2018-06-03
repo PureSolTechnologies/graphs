@@ -3,7 +3,7 @@ package com.puresoltechnologies.graphs.trees;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.puresoltechnologies.streaming.StreamIterator;
+import com.puresoltechnologies.streaming.iterators.StreamIterator;
 
 /**
  * This is a base implementation of a binary search tree.
@@ -71,9 +71,8 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
      * 
      * @param key
      *            the key
-     * @return the value associated with the given key if the key is in the
-     *         symbol table and <tt>null</tt> if the key is not in the symbol
-     *         table
+     * @return the value associated with the given key if the key is in the symbol
+     *         table and <tt>null</tt> if the key is not in the symbol table
      * @throws NullPointerException
      *             if <tt>key</tt> is <tt>null</tt>
      */
@@ -109,8 +108,8 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
     }
 
     /**
-     * This method is used to put a new node into the tree. The actual insertion
-     * is done by a specialized method in an actual implementation.
+     * This method is used to put a new node into the tree. The actual insertion is
+     * done by a specialized method in an actual implementation.
      * 
      * @param key
      *            is the key of the new node.
