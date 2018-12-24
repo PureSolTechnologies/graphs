@@ -22,8 +22,7 @@ import com.puresoltechnologies.graphs.graph.Vertex;
  * 
  * @author Rick-Rainer Ludwig
  * 
- * @param <N>
- *            is the actual class of the {@link TreeNode} implementation.
+ * @param <N> is the actual class of the {@link TreeNode} implementation.
  */
 public interface TreeNode<N extends TreeNode<N>> extends Vertex<N, TreeLink<N>> {
 

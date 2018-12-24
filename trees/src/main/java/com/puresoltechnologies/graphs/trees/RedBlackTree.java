@@ -58,12 +58,12 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      * Inserts the specified key-value pair into the symbol table, overwriting the
      * old value with the new value if the symbol table already contains the
      * specified key. Deletes the specified key (and its associated value) from this
-     * symbol table if the specified value is <tt>null</tt>.
+     * symbol table if the specified value is <code>null</code>.
      *
      * @param key
-     *            the key
+     *                  the key
      * @param value
-     *            the value
+     *                  the value
      */
     @Override
     public void put(Key key, Value value) {
@@ -109,7 +109,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      * Removes the smallest key and associated value from the symbol table.
      * 
      * @throws NoSuchElementException
-     *             if the symbol table is empty
+     *                                    if the symbol table is empty
      */
     public void deleteMin() {
 	if (isEmpty())
@@ -143,7 +143,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      * Removes the largest key and associated value from the symbol table.
      * 
      * @throws NoSuchElementException
-     *             if the symbol table is empty
+     *                                    if the symbol table is empty
      */
     public void deleteMax() {
 	if (isEmpty())
@@ -182,7 +182,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      * the key is in this symbol table).
      *
      * @param key
-     *            the key
+     *                the key
      */
     @Override
     public void delete(Key key) {
@@ -344,7 +344,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      * 
      * @return the smallest key in the symbol table
      * @throws NoSuchElementException
-     *             if the symbol table is empty
+     *                                    if the symbol table is empty
      */
     public Key min() {
 	if (isEmpty())
@@ -366,7 +366,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      * 
      * @return the largest key in the symbol table
      * @throws NoSuchElementException
-     *             if the symbol table is empty
+     *                                    if the symbol table is empty
      */
     public Key max() {
 	if (isEmpty())
@@ -385,14 +385,14 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 
     /**
      * Returns the largest key in the symbol table less than or equal to
-     * <tt>key</tt>.
+     * <code>key</code>.
      * 
      * @param key
-     *            the key
+     *                the key
      * @return the largest key in the symbol table less than or equal to
-     *         <tt>key</tt>
+     *         <code>key</code>
      * @throws NoSuchElementException
-     *             if there is no such key
+     *                                    if there is no such key
      */
     public Key floor(Key key) {
 	if (isEmpty())
@@ -406,14 +406,14 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 
     /**
      * Returns the largest node with key in the symbol table less than or equal to
-     * <tt>key</tt>.
+     * <code>key</code>.
      * 
      * @param key
-     *            the key
+     *                the key
      * @return the largest key in the symbol table less than or equal to
-     *         <tt>key</tt>
+     *         <code>key</code>
      * @throws NoSuchElementException
-     *             if there is no such key
+     *                                    if there is no such key
      */
     public RedBlackTreeNode<Key, Value> floorNode(Key key) {
 	if (isEmpty()) {
@@ -450,14 +450,14 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 
     /**
      * Returns the smallest key in the symbol table greater than or equal to
-     * <tt>key</tt>.
+     * <code>key</code>.
      * 
      * @param key
-     *            the key
+     *                the key
      * @return the smallest key in the symbol table greater than or equal to
-     *         <tt>key</tt>
+     *         <code>key</code>
      * @throws NoSuchElementException
-     *             if there is no such key
+     *                                    if there is no such key
      */
     public Key ceiling(Key key) {
 	if (isEmpty())
@@ -471,14 +471,14 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 
     /**
      * Returns the smallest key in the symbol table greater than or equal to
-     * <tt>key</tt>.
+     * <code>key</code>.
      * 
      * @param key
-     *            the key
+     *                the key
      * @return the smallest key in the symbol table greater than or equal to
-     *         <tt>key</tt>
+     *         <code>key</code>
      * @throws NoSuchElementException
-     *             if there is no such key
+     *                                    if there is no such key
      */
     public RedBlackTreeNode<Key, Value> ceilingNode(Key key) {
 	if (isEmpty()) {
@@ -517,10 +517,11 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      * Return the kth smallest key in the symbol table.
      * 
      * @param k
-     *            the order statistic
+     *              the order statistic
      * @return the kth smallest key in the symbol table
      * @throws IllegalArgumentException
-     *             unless <tt>k</tt> is between 0 and <em>N</em> &minus; 1
+     *                                      unless <code>k</code> is between 0 and
+     *                                      <em>N</em> &minus; 1
      */
     public Key select(int k) {
 	if (k < 0 || k >= size(root))
@@ -544,12 +545,12 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 
     /**
      * Return the number of keys in the symbol table strictly less than
-     * <tt>key</tt>.
+     * <code>key</code>.
      * 
      * @param key
-     *            the key
+     *                the key
      * @return the number of keys in the symbol table strictly less than
-     *         <tt>key</tt>
+     *         <code>key</code>
      */
     public int rank(Key key) {
 	return rank(key, root);
@@ -573,11 +574,11 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      ***************************************************************************/
 
     /**
-     * Returns all keys in the symbol table as an <tt>Iterable</tt>. To iterate over
-     * all of the keys in the symbol table named <tt>st</tt>, use the foreach
-     * notation: <tt>for (Key key : st.keys())</tt>.
+     * Returns all keys in the symbol table as an <code>Iterable</code>. To iterate
+     * over all of the keys in the symbol table named <code>st</code>, use the
+     * foreach notation: <code>for (Key key : st.keys())</code>.
      * 
-     * @return all keys in the sybol table as an <tt>Iterable</tt>
+     * @return all keys in the sybol table as an <code>Iterable</code>
      */
     public Iterable<Key> keys() {
 	if (isEmpty())
@@ -587,14 +588,14 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
 
     /**
      * Returns all keys in the symbol table in the given range, as an
-     * <tt>Iterable</tt>.
+     * <code>Iterable</code>.
      * 
      * @param lo
-     *            is the lower border.
+     *               is the lower border.
      * @param hi
-     *            is the upper border.
-     * @return all keys in the sybol table between <tt>lo</tt> (inclusive) and
-     *         <tt>hi</tt> (exclusive) as an <tt>Iterable</tt>
+     *               is the upper border.
+     * @return all keys in the sybol table between <code>lo</code> (inclusive) and
+     *         <code>hi</code> (exclusive) as an <code>Iterable</code>
      */
     public Iterable<Key> keys(Key lo, Key hi) {
 	Queue<Key> queue = new LinkedList<>();
@@ -622,11 +623,11 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends
      * Returns the number of keys in the symbol table in the given range.
      * 
      * @param low
-     *            is the lower border.
+     *                 is the lower border.
      * @param high
-     *            is the upper border.
-     * @return the number of keys in the symbol table between <tt>low</tt>
-     *         (inclusive) and <tt>high</tt> (exclusive)
+     *                 is the upper border.
+     * @return the number of keys in the symbol table between <code>low</code>
+     *         (inclusive) and <code>high</code> (exclusive)
      */
     public int size(Key low, Key high) {
 	if (low.compareTo(high) > 0)

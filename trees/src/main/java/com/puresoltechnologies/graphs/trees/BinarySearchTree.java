@@ -49,7 +49,7 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
     /**
      * Checks whether the tree is empty.
      * 
-     * @return <tt>true</tt> is returned in case the tree is empty.
+     * @return <code>true</code> is returned in case the tree is empty.
      *         <code>false</code> is returned otherwise.
      */
     public boolean isEmpty() {
@@ -70,11 +70,11 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
      * normal recursive binary search.
      * 
      * @param key
-     *            the key
+     *                the key
      * @return the value associated with the given key if the key is in the symbol
-     *         table and <tt>null</tt> if the key is not in the symbol table
+     *         table and <code>null</code> if the key is not in the symbol table
      * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
+     *                                  if <code>key</code> is <code>null</code>
      */
     public Value get(Key key) {
 	return get(root, key);
@@ -97,11 +97,11 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
      * Checks whether a key exists in the tree.
      * 
      * @param key
-     *            is the key to be looked for.
-     * @return <tt>true</tt> if this symbol table contains <tt>key</tt> and
-     *         <tt>false</tt> otherwise
+     *                is the key to be looked for.
+     * @return <code>true</code> if this symbol table contains <code>key</code> and
+     *         <code>false</code> otherwise
      * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
+     *                                  if <code>key</code> is <code>null</code>
      */
     public boolean contains(Key key) {
 	return get(key) != null;
@@ -112,9 +112,9 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
      * done by a specialized method in an actual implementation.
      * 
      * @param key
-     *            is the key of the new node.
+     *                  is the key of the new node.
      * @param value
-     *            is the value of the new node.
+     *                  is the value of the new node.
      */
     public abstract void put(Key key, Value value);
 
@@ -123,9 +123,9 @@ public abstract class BinarySearchTree<N extends BinaryTreeNode<N, Key, Value>, 
      * deletion is done by a specialized method in an actual implementation.
      *
      * @param key
-     *            is the key of the node to be removed.
+     *                is the key of the node to be removed.
      * @throws NullPointerException
-     *             if <tt>key</tt> is <tt>null</tt>
+     *                                  if <code>key</code> is <code>null</code>
      */
     public abstract void delete(Key key);
 
